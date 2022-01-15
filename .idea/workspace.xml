@@ -4,32 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69d34d2d-3c42-4e04-b16d-a725cf6f5682" name="Default Changelist" comment="backend is working now">
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/home/home.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/home/home.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/home/home.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/home/home.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/register-view/register-view.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/register-view/register-view.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/register-view/register-view.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/register-view/register-view.component.ts" afterDir="false" />
+    <list default="true" id="69d34d2d-3c42-4e04-b16d-a725cf6f5682" name="Default Changelist" comment="connection between frontend and backend is working now">
+      <change afterPath="$PROJECT_DIR$/users_credentials" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dyplomowanie_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/dyplomowanie_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/payload/response/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/payload/response/JwtResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/security/services/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/security/services/UserDetailsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/_services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/_services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/_services/token-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/_services/token-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/login-view/login-view.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/login-view/login-view.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/src/app/login-view/login-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/src/app/login-view/login-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graduation-process-frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/model/ERole.java" beforeDir="false" afterPath="$PROJECT_DIR$/graduation-process-backend/src/main/java/com/example/graduationprocessbackend/model/ERole.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642266582141</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="connection between frontend and backend is working now">
+      <created>1642284497810</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1642284497810</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -148,6 +135,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added files" />
     <MESSAGE value="backend is working now" />
-    <option name="LAST_COMMIT_MESSAGE" value="backend is working now" />
+    <MESSAGE value="connection between frontend and backend is working now" />
+    <option name="LAST_COMMIT_MESSAGE" value="connection between frontend and backend is working now" />
   </component>
 </project>
