@@ -1,18 +1,39 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">Dyplomowanie</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+    <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_STUDENT')">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Lista zgłoszonych tematów</a>
+      </li>
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home" >Zgłoś nowy temat</a>
+      </li>
+    </ul>
+
+     <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_DEANS_REPRESENTATIVE')">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Przydziel recenzentów</a>
+      </li>
+     </ul>
+
+    <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_UNIVERSITY_EMPLOYEE')">
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Lista tematów</a>
       </li>
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Dodaj temat</a>
+        <a href="/home" class="nav-link" routerLink="home">Zgłoś nowy temat</a>
       </li>
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Lista recenzji</a>
       </li>
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Wystaw recenzję</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_PROGRAM_COMMISSION')">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Zatwierdź tematy</a>
       </li>
     </ul>
 

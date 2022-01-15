@@ -7,7 +7,7 @@ import { TokenStorageService } from './_services/token-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private roles: string[];
+  roles: string[];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
