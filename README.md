@@ -3,6 +3,10 @@ Graduation process support app - group project for studies [PSI]
 
 
 ## How to run - backend
+Run mysql instance with database named ```dyplomowanie_db```.
+
+Setup your database credentials into ```applicaiton.properties```
+
 ```
 mvn clean install
 mvn install -DskipTests
