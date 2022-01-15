@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Sty 2022, 13:27
+-- Czas generowania: 15 Sty 2022, 17:31
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -47,6 +47,26 @@ CREATE TABLE `reviews` (
   `review_description` text COLLATE utf8_bin DEFAULT NULL,
   `creation_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'ROLE_USER'),
+(2, 'ROLE_MODERATOR'),
+(3, 'ROLE_ADMIN');
 
 -- --------------------------------------------------------
 
@@ -119,8 +139,7 @@ CREATE TABLE `thesis_has_reviewer` (
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL
+  `password` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -153,6 +172,17 @@ CREATE TABLE `user_has_reported_thesis` (
   `reported_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `user_has_role`
+--
+
+CREATE TABLE `user_has_role` (
+  `role_id` int(11) NOT NULL,
+  `user_id` int(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -170,6 +200,12 @@ ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id_review`),
   ADD KEY `id_thesis_fk_r_idx` (`id_thesis`),
   ADD KEY `id_user_fk_r_idx` (`id_user`);
+
+--
+-- Indeksy dla tabeli `roles`
+--
+ALTER TABLE `roles`
+  ADD KEY `role_id_index` (`id`);
 
 --
 -- Indeksy dla tabeli `student_has_field_of_study`
@@ -226,6 +262,13 @@ ALTER TABLE `user_has_reported_thesis`
   ADD PRIMARY KEY (`id_user_has_reported_thesis`),
   ADD KEY `id_thesis_fk_ushrt_idx` (`id_thesis`),
   ADD KEY `id_user_fk_uhrt_idx` (`id_user`);
+
+--
+-- Indeksy dla tabeli `user_has_role`
+--
+ALTER TABLE `user_has_role`
+  ADD PRIMARY KEY (`user_id`,`role_id`),
+  ADD KEY `id_role_uhr_fk_idx` (`role_id`);
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
@@ -312,6 +355,13 @@ ALTER TABLE `users_details`
 ALTER TABLE `user_has_reported_thesis`
   ADD CONSTRAINT `id_thesis_fk_uhrt` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk_uhrt` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `user_has_role`
+--
+ALTER TABLE `user_has_role`
+  ADD CONSTRAINT `id_role_uhr_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_user_uhr_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
