@@ -137,9 +137,9 @@ CREATE TABLE `thesis_has_reviewer` (
 --
 
 CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(45) NOT NULL
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -246,7 +246,7 @@ ALTER TABLE `thesis_has_reviewer`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `users_details`
@@ -268,6 +268,7 @@ ALTER TABLE `user_has_reported_thesis`
 --
 ALTER TABLE `user_has_role`
   ADD PRIMARY KEY (`user_id`,`role_id`),
+  ADD KEY `id_user_uhr_fk_idx` (`user_id`),
   ADD KEY `id_role_uhr_fk_idx` (`role_id`);
 
 --
@@ -290,7 +291,7 @@ ALTER TABLE `thesis`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `users_details`
@@ -313,55 +314,55 @@ ALTER TABLE `user_has_reported_thesis`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `id_thesis_fk_r` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk_r` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk_r` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `student_has_field_of_study`
 --
 ALTER TABLE `student_has_field_of_study`
   ADD CONSTRAINT `id_field_of_study_fk` FOREIGN KEY (`id_field_of_study`) REFERENCES `field_of_study` (`id_field_of_study`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk_shfos` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk_shfos` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `student_has_thesis`
 --
 ALTER TABLE `student_has_thesis`
   ADD CONSTRAINT `id_thesis_fk_sht` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk_sht` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk_sht` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `thesis_has_promoter`
 --
 ALTER TABLE `thesis_has_promoter`
   ADD CONSTRAINT `id_thesis_fk1` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `thesis_has_reviewer`
 --
 ALTER TABLE `thesis_has_reviewer`
   ADD CONSTRAINT `id_thesis_fk2` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `users_details`
 --
 ALTER TABLE `users_details`
-  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `user_has_reported_thesis`
 --
 ALTER TABLE `user_has_reported_thesis`
   ADD CONSTRAINT `id_thesis_fk_uhrt` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk_uhrt` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_fk_uhrt` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `user_has_role`
 --
 ALTER TABLE `user_has_role`
   ADD CONSTRAINT `id_role_uhr_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_uhr_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `id_user_uhr_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

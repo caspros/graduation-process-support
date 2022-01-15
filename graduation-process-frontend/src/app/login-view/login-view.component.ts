@@ -24,4 +24,26 @@ export class LoginViewComponent implements OnInit {
       }
     }
 
+      onSubmit(): void {
+        this.authService.login(this.form).subscribe(
+          data => {
+            this.tokenStorage.saveToken(data.accessToken);
+            this.tokenStorage.saveUser(data);
+
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getUser().roles;
+            this.reloadPage();
+          },
+          err => {
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+          }
+        );
+      }
+
+      reloadPage(): void {
+          window.location.reload();
+        }
+
 }

@@ -2,7 +2,10 @@
 
   <div class="card card-container">
     <form
+      *ngIf="!isLoggedIn"
       name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
       novalidate
     >
       <div class="form-group">
@@ -10,13 +13,15 @@
         <input
           type="email"
           class="form-control"
-          name="username"
+          name="email"
+          [(ngModel)]="form.email"
           required
+          #email="ngModel"
         />
         <div
           class="alert alert-danger"
           role="alert"
-          *ngIf="isLoginFailed"
+          *ngIf="f.submitted && email.invalid"
         >
           E-mail jest wymagany!
         </div>
@@ -27,13 +32,15 @@
           type="password"
           class="form-control"
           name="password"
+          [(ngModel)]="form.password"
           required
           minlength="6"
+          #password="ngModel"
         />
         <div
           class="alert alert-danger"
           role="alert"
-          *ngIf="isLoginFailed"
+          *ngIf="f.submitted && password.invalid"
         >
           <div>Hasło jest wymagane!</div>
           <div>
@@ -50,15 +57,15 @@
         <div
           class="alert alert-danger"
           role="alert"
-          *ngIf="isLoginFailed"
+          *ngIf="f.submitted && isLoginFailed"
         >
-          Logowanie zakończone niepowodzeniem:
+          Logowanie zakończone niepowodzeniem: {{ errorMessage }}
         </div>
       </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isLoggedIn">
-      Zalogowany jako
+      Zalogowany jako {{ roles }}.
     </div>
   </div>
 </div>
