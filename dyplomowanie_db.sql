@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Sty 2022, 17:31
+-- Czas generowania: 15 Sty 2022, 23:46
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -56,7 +56,7 @@ CREATE TABLE `reviews` (
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) DEFAULT NULL
+  `name` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -65,8 +65,11 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`) VALUES
 (1, 'ROLE_USER'),
-(2, 'ROLE_MODERATOR'),
-(3, 'ROLE_ADMIN');
+(2, 'ROLE_ADMIN'),
+(3, 'ROLE_STUDENT'),
+(4, 'ROLE_UNIVERSITY_EMPLOYEE'),
+(5, 'ROLE_PROGRAM_COMMISSION'),
+(6, 'ROLE_DEANS_REPRESENTATIVE');
 
 -- --------------------------------------------------------
 
@@ -142,6 +145,25 @@ CREATE TABLE `users` (
   `password` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`) VALUES
+(1, 'admin@admin.com', '$2a$10$GHYNtzSHWEUr8dFY4xVJKOheDErjOxaGmWEDKTGJL8mq0jYgyW68e'),
+(2, 'pelnomocnikdziekana@pwr.pl', '$2a$10$XSj6F9YhRvEJzVfVWyN50ugyPS715ApWrIb8RjmC1hGiv5lxTV15G'),
+(3, 'komisjaprogramowa@pwr.pl', '$2a$10$0BW1te7eCPme9rn4/5s.ZOpcunsGTM4C5DHa6.8Hk/bxnrNyBYY3K'),
+(4, 'adam.adamski@pwr.edu.pl', '$2a$10$C4l8UKGTWVSs4TW9tceCqOkjU.BC5Ad9Yc4ULTAb7Nu0.mkPPGI4a'),
+(5, '111111@student.pwr.edu.pl', '$2a$10$o0fBvj0gTOprW/AeT3/A0uPnhPnIHfiCytwc0q7qJtMEWARYo8Co.'),
+(6, 'barbara.barbarska@pwr.edu.pl', '$2a$10$hT6qpu8bOFm89lP9zDnOkuFzhOKLjN4b3t.SIGF7UiOW1aEnaUuaq'),
+(7, 'celina.celinowska@pwr.edu.pl', '$2a$10$XHT0FxEl0DHf/IMK0KjnT.RJ07ubr2MH2djFZNGHHjK6.xPSXHQ46'),
+(8, 'dariusz.dariuszowski@pwr.edu.pl', '$2a$10$kZS9S9fRecakdjb3YKJ11uFMo/vTaB3TsJpvulaymlvMd7y6Hx1jq'),
+(9, 'eugeniusz.eugeniowski@pwr.edu.pl', '$2a$10$gRoPqtyeTRXeHbMoijFXueAL/e1ffxcbRCWm2Cqp2YcICW5vN6722'),
+(10, 'faustyna.faustynowska@pwr.edu.pl', '$2a$10$t/v.LY1v2fEIABKBbycxk.bKl9Efvkw7QDkzNmiubKJXEs8GRF7f2'),
+(11, '222222@student.pwr.edu.pl', '$2a$10$G0zwdkK9haa6iq5cFuAi8e8IxmHghk4vEvFoS/l7hIP6ajjtr0Xwy'),
+(12, '333333@student.pwr.edu.pl', '$2a$10$tR2Pw.xOctLtgRHNKExOmOUZ99VRLDAMnCgVOqOnlXwfPics0bW1q'),
+(13, '444444@student.pwr.edu.pl', '$2a$10$1XrWvrczvXEH.27l0w4A4.CAMZxvn6KXh2ULw84a0PTdLh1.Ma6dq');
+
 -- --------------------------------------------------------
 
 --
@@ -182,6 +204,25 @@ CREATE TABLE `user_has_role` (
   `role_id` int(11) NOT NULL,
   `user_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `user_has_role`
+--
+
+INSERT INTO `user_has_role` (`role_id`, `user_id`) VALUES
+(2, 1),
+(6, 2),
+(5, 3),
+(4, 4),
+(3, 5),
+(4, 6),
+(4, 7),
+(4, 8),
+(4, 9),
+(4, 10),
+(3, 11),
+(3, 12),
+(3, 13);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -246,7 +287,8 @@ ALTER TABLE `thesis_has_reviewer`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`);
 
 --
 -- Indeksy dla tabeli `users_details`
@@ -291,7 +333,7 @@ ALTER TABLE `thesis`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `users_details`
