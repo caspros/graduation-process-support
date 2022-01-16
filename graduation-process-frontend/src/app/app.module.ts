@@ -11,6 +11,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeComponent } from './home/home.component';
+import { AddThesisComponent } from './add-thesis/add-thesis.component';
+import { Error401Component } from './common/error401/error401.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { HomeComponent } from './home/home.component';
     LoginViewComponent,
     RegisterViewComponent,
     HomeComponent,
+    AddThesisComponent,
+    Error401Component,
   ],
   imports: [
     BrowserModule,

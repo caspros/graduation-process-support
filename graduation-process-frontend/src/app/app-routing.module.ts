@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginViewComponent } from './login-view/login-view.component'
 import { RegisterViewComponent } from './register-view/register-view.component'
+import { AddThesisComponent } from './add-thesis/add-thesis.component'
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginViewComponent },
   { path: 'register', component: RegisterViewComponent },
+  { path: 'add-thesis', component: AddThesisComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
