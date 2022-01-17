@@ -11,11 +11,15 @@ import { Error401Component } from '../common/error401/error401.component';
 })
 
 export class AddThesisComponent implements OnInit {
+
   form: any = {};
   content: string;
   authorized = false;
   isAddingFailed = false;
+  isSuccessful = false;
   errorMessage = '';
+  type = 'magisterska';
+  status = 'zgłoszona';
 
  constructor(private userService: UserService, private thesisService: ThesisService) { }
 
@@ -32,8 +36,10 @@ export class AddThesisComponent implements OnInit {
    }
 
    onSubmit(): void {
-      this.thesisService.add(this.form).subscribe(
+      this.thesisService.createThesis(this.form).subscribe(
         data => {
+          console.log(data);
+          this.isSuccessful = true;
           this.isAddingFailed = false;
         },
         err => {
