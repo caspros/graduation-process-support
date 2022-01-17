@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Thesis } from '../_classes/thesis'
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,17 +16,26 @@ export class ThesisService {
 
   private baseURL = 'http://localhost:8080/api/thesis/';
   private baseURLCreateThesis = 'http://localhost:8080/api/create-thesis';
+  private user: any;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
     getThesisList(): Observable<Thesis[]>{
       return this.httpClient.get<Thesis[]>(`${this.baseURL}`);
     }
 
     createThesis(thesis: Thesis): Observable<Object>{
+
+      if (this.tokenStorage.getToken()) {
+            this.user = this.tokenStorage.getUser();
+            //thesis.id_student = this.user.id;
+     }
       thesis.creation_date = new Date()
+      //user = this.tokenStorage.getUser()
+
       console.log(thesis)
-      return this.httpClient.post(`${this.baseURLCreateThesis}`, thesis);
+      console.log(this.user.id)
+      return this.httpClient.post(`${this.baseURLCreateThesis}`, thesis, this.user.id);
     }
 
     getThesisById(id: number): Observable<Thesis>{

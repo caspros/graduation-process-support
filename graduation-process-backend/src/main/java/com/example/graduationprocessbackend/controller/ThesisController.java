@@ -37,6 +37,7 @@ public class ThesisController {
     // create thesis rest api
     @PostMapping("/create-thesis")
     public Thesis createThesis(@RequestBody Thesis thesis) {
+        //System.out.println(id_student);
         return thesisRepository.save(thesis);
     }
 
