@@ -3,13 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginViewComponent } from './login-view/login-view.component'
 import { RegisterViewComponent } from './register-view/register-view.component'
 import { AddThesisComponent } from './add-thesis/add-thesis.component'
+import { ThesisListComponent } from './thesis-list/thesis-list.component'
 import { HomeComponent } from './home/home.component';
+import { ReviewersAssignmentComponent } from './reviewers-assignment/reviewers-assignment.component'
+import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confirmation.component'
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginViewComponent },
   { path: 'register', component: RegisterViewComponent },
-  { path: 'add-thesis', component: AddThesisComponent },
+  { path: 'thesis/add', component: AddThesisComponent },
+  { path: 'thesis', component: ThesisListComponent },
+  { path: 'thesis/confirmation', component: ThesisConfirmationComponent },
+  { path: 'reviewers-assignment', component: ReviewersAssignmentComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

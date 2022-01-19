@@ -3,16 +3,16 @@
     <a href="#" class="navbar-brand">Dyplomowanie</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="showStudentFeatures">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Lista zgłoszonych tematów</a>
+        <a href="/thesis" class="nav-link" routerLink="thesis">Lista zgłoszonych tematów</a>
       </li>
       <li class="nav-item">
-        <a href="/add-thesis" class="nav-link" routerLink="add-thesis" >Zgłoś nowy temat</a>
+        <a href="/thesis/add" class="nav-link" routerLink="thesis/add" >Zgłoś nowy temat</a>
       </li>
     </ul>
 
      <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_DEANS_REPRESENTATIVE')">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Przydziel recenzentów</a>
+        <a href="/reviewers-assignment" class="nav-link" routerLink="reviewers-assignment">Przydziel recenzentów</a>
       </li>
      </ul>
 
@@ -33,7 +33,7 @@
 
     <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_PROGRAM_COMMISSION')">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Zatwierdź tematy</a>
+        <a href="/thesis/confirmation" class="nav-link" routerLink="thesis/confirmation">Zatwierdź tematy</a>
       </li>
     </ul>
 

@@ -13,6 +13,9 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeComponent } from './home/home.component';
 import { AddThesisComponent } from './add-thesis/add-thesis.component';
 import { Error401Component } from './common/error401/error401.component';
+import { ThesisListComponent } from './thesis-list/thesis-list.component';
+import { ReviewersAssignmentComponent } from './reviewers-assignment/reviewers-assignment.component';
+import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { Error401Component } from './common/error401/error401.component';
     HomeComponent,
     AddThesisComponent,
     Error401Component,
+    ThesisListComponent,
+    ReviewersAssignmentComponent,
+    ThesisConfirmationComponent,
   ],
   imports: [
     BrowserModule,
