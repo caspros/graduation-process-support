@@ -11,6 +11,8 @@ Setup your database credentials into ```applicaiton.properties```
 mvn clean install
 mvn install -DskipTests
 ```
+or 
+run main in ```GraduationProcessBackendApplication.java```
 
 Backend url: ``` http://localhost:8080/ ```
 
