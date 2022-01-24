@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThesisService } from '../_services/thesis.service';
 
 @Component({
   selector: 'app-thesis-list',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThesisListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private thesisService: ThesisService) { }
+
+  thesis: any = {}
 
   ngOnInit(): void {
+    this.thesisService.getAllThesis().subscribe(
+            data => {
+              console.log(data);
+              this.thesis = data;
+            },
+            err => {
+              console.log(err);
+            }
+       );
   }
 
 }

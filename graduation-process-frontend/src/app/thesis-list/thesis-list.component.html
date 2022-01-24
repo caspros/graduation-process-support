@@ -9,26 +9,16 @@
       <th scope="col">Temat</th>
       <th scope="col">Wybrany promotor</th>
       <th scope="col">Status</th>
+      <th scope="col">Data zgłoszenia</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item.title_pl }}</td>
+      <td>{{ item.title_eng }}</td>
+      <td>{{ item.status }}</td>
+      <td>{{ item.creation_date.substring(0,10) }}</td>
     </tr>
     </tbody>
   </table>

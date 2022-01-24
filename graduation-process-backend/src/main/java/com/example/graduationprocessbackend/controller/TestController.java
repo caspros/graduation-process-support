@@ -38,4 +38,10 @@ public class TestController {
 	public String studentAccess() {
 		return "Student Board.";
 	}
+
+	@GetMapping("/commission")
+	@PreAuthorize("hasRole('PROGRAM_COMMISSION')")
+	public String commissionAccess() {
+		return "Commision Board.";
+	}
 }

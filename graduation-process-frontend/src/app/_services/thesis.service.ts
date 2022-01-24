@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from "rxjs/operators";
 import { Thesis } from '../_classes/thesis'
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -14,7 +15,7 @@ const httpOptions = {
 })
 export class ThesisService {
 
-  private baseURL = 'http://localhost:8080/api/thesis/';
+  private baseURL = 'http://localhost:8080/api/thesis';
   private baseURLCreateThesis = 'http://localhost:8080/api/create-thesis';
   private user: any;
 
@@ -31,7 +32,8 @@ export class ThesisService {
             //thesis.id_student = this.user.id;
      }
       thesis.creation_date = new Date()
-      //user = this.tokenStorage.getUser()
+      thesis.type = "magisterska"
+      thesis.status = "zgłoszona"
 
       console.log(thesis)
       console.log(this.user.id)
@@ -40,6 +42,10 @@ export class ThesisService {
 
     getThesisById(id: number): Observable<Thesis>{
       return this.httpClient.get<Thesis>(`${this.baseURL}/${id}`);
+    }
+
+    getAllThesis(): Observable<Thesis>{
+      return this.httpClient.get<Thesis>(`${this.baseURL}`);
     }
 
     updateThesis(id: number, thesis: Thesis): Observable<Object>{

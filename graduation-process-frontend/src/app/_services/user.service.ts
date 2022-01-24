@@ -26,4 +26,8 @@ export class UserService {
   getStudentFeatures(): Observable<any> {
     return this.http.get(API_URL + 'student', { responseType: 'text' });
   }
+
+  getCommissionFeatures(): Observable<any> {
+    return this.http.get(API_URL + 'commission', { responseType: 'text' });
+  }
 }
