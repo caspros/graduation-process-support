@@ -7,6 +7,8 @@ import { ThesisListComponent } from './thesis-list/thesis-list.component'
 import { HomeComponent } from './home/home.component';
 import { ReviewersAssignmentComponent } from './reviewers-assignment/reviewers-assignment.component'
 import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confirmation.component'
+import { AddReviewComponent} from "./add-review/add-review.component";
+import {ReviewListComponent} from "./review-list/review-list.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'thesis', component: ThesisListComponent },
   { path: 'thesis/confirmation', component: ThesisConfirmationComponent },
   { path: 'reviewers-assignment', component: ReviewersAssignmentComponent },
+  { path: 'review', component: ReviewListComponent },
+  { path: 'review/add', component: AddReviewComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

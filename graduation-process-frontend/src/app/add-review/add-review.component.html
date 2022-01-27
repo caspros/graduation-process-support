@@ -1,0 +1,67 @@
+<div class="col-md-12" *ngIf="authorized; else unauthorizedBlock">
+<div class="container">
+    <h1 class="center">Dane pracy dyplomowej</h1>
+    <div class="card card-container">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput1">Wybrana praca</label>
+            <input class="form-control" id="readOnlyInput1" type="text" placeholder="Aplikacja webowa" readonly="">
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput2">Autor</label>
+            <input class="form-control" id="readOnlyInput2" type="text" placeholder="Ewelina Trefl" readonly="">
+          </fieldset>
+        </div>
+
+
+        <h1 class="center">Recenzja</h1>
+        <div class="form-group">
+          <select class="form-control" id="promoter3" name="promoter">
+            <option>Wybierz ocene</option>
+            <option>2.0</option>
+            <option>3.0</option>
+            <option>3.5</option>
+            <option>4.0</option>
+            <option>4.5</option>
+            <option>5.0</option>
+            <option>5.5</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="short_description">Ocena opisowa:</label>
+          <textarea class="form-control" id="short_description" name="short_description" rows="3" [(ngModel)]="form.short_description"
+                    required
+                    #short_description="ngModel"></textarea>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && short_description.invalid"
+          >
+            Ocena opisowa jest wymagana!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Wystaw recenzje
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  <ng-template #unauthorizedBlock>
+    Error 401 Unauthorized
+  </ng-template>
+

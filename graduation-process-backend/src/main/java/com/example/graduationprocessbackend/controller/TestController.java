@@ -44,4 +44,10 @@ public class TestController {
 	public String commissionAccess() {
 		return "Commision Board.";
 	}
+
+	@GetMapping("/universityemployee")
+	@PreAuthorize("hasRole('UNIVERSITY_EMPLOYEE')")
+	public String universityemployeeAccess() {
+		return "Employye Board.";
+	}
 }

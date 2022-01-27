@@ -16,6 +16,8 @@ import { Error401Component } from './common/error401/error401.component';
 import { ThesisListComponent } from './thesis-list/thesis-list.component';
 import { ReviewersAssignmentComponent } from './reviewers-assignment/reviewers-assignment.component';
 import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confirmation.component';
+import { ReviewListComponent } from './review-list/review-list.component';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confir
     ThesisListComponent,
     ReviewersAssignmentComponent,
     ThesisConfirmationComponent,
+    ReviewListComponent,
+    AddReviewComponent,
   ],
   imports: [
     BrowserModule,
