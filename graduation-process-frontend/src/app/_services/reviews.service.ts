@@ -5,6 +5,9 @@ import { map } from "rxjs/operators";
 import { Reviews } from '../_classes/reviews'
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { environment } from '../../environments/environment'
+
+const backendURL = environment.apiURL;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,9 +17,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ReviewsService {
-
-  private baseURL = 'http://localhost:8080/api/reviews';
-  private baseURLCreateReviews = 'http://localhost:8080/api/create-reviews';
+  private baseURL = backendURL + '/api/reviews';
+  private baseURLCreateReviews = backendURL + '/api/create-reviews';
   private user: any;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }

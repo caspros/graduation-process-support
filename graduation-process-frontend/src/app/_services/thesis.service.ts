@@ -5,6 +5,9 @@ import { map } from "rxjs/operators";
 import { Thesis } from '../_classes/thesis'
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { environment } from '../../environments/environment'
+
+const backendURL = environment.apiURL;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,9 +17,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ThesisService {
-
-  private baseURL = 'http://localhost:8080/api/thesis';
-  private baseURLCreateThesis = 'http://localhost:8080/api/create-thesis';
+  private baseURL = backendURL + '/api/thesis';
+  private baseURLCreateThesis = backendURL + '/api/create-thesis';
   private user: any;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }
