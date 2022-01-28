@@ -6,6 +6,9 @@ import java.util.Map;
 
 import com.example.graduationprocessbackend.repository.ThesisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +27,11 @@ import com.example.graduationprocessbackend.model.Thesis;
 @RestController
 @RequestMapping("/api/")
 public class ThesisController {
+
+//    @Autowired
+//    private Environment env;
+//
+//    String frontendUrl = env.getProperty("graduationprocessbackend.app.frontendUrl");
 
     @Autowired
     private ThesisRepository thesisRepository;
