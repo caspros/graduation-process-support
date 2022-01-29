@@ -15,6 +15,7 @@
 	<description>Graduation Process Support App Spring Boot Backend</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>com.example.graduationprocessbackend.GraduationProcessBackendApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
