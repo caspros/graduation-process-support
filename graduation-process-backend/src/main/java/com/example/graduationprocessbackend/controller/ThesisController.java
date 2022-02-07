@@ -8,12 +8,18 @@ import com.example.graduationprocessbackend.model.User;
 import com.example.graduationprocessbackend.repository.ThesisRepository;
 import com.example.graduationprocessbackend.repository.StudentHasThesisRepository;
 import com.example.graduationprocessbackend.repository.UserRepository;
+import com.example.graduationprocessbackend.security.jwt.AuthTokenFilter;
+import com.example.graduationprocessbackend.security.jwt.JwtUtils;
+import com.example.graduationprocessbackend.security.services.UserDetailsImpl;
+import com.example.graduationprocessbackend.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.graduationprocessbackend.exception.ResourceNotFoundException;
 import com.example.graduationprocessbackend.model.Thesis;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -31,8 +37,10 @@ public class ThesisController {
 
     // get all thesis
     @GetMapping("/thesis")
-    public List<Thesis> getAllThesis(){
-        return thesisRepository.findAll();
+    public List<Thesis> getAllThesis(@AuthenticationPrincipal UserDetailsImpl user){
+        System.out.println("Id zalogowanego usera: " + user.getId());
+        return thesisRepository.findByUserId(user.getId());
+        //return thesisRepository.findAll();
     }
 
     @PutMapping("/thesis/{thesisId}/students/{studentId}")

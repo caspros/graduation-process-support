@@ -13,5 +13,5 @@ public interface StudentHasThesisRepository extends JpaRepository<Thesis, User> 
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO student_has_thesis (user_id, thesis_id) VALUES (?1, ?2)" , nativeQuery = true)
-    void addStudentHasThesis(Integer userId, Integer ThesisId);
+    void addStudentHasThesis(Integer userId, Integer thesisId);
 }
