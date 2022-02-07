@@ -1,5 +1,9 @@
 package com.example.graduationprocessbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +36,13 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable( name = "student_has_thesis",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "thesis_id"))
+    private Collection<Thesis> thesisEnrolled = new ArrayList<>();
 
     public User() {
     }
@@ -71,5 +82,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Collection<Thesis> getThesisEnrolled() {
+        return thesisEnrolled;
+    }
+
+    public void setThesisEnrolled(Collection<Thesis> thesisEnrolled) {
+        this.thesisEnrolled = thesisEnrolled;
     }
 }

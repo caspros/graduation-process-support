@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { ThesisService } from '../_services/thesis.service';
 import { Error401Component } from '../common/error401/error401.component';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-add-thesis',
@@ -20,8 +21,12 @@ export class AddThesisComponent implements OnInit {
   errorMessage = '';
   type = 'magisterska';
   status = 'zgłoszona';
+  private addedThesis: any = {};
+  private user: any;
 
- constructor(private userService: UserService, private thesisService: ThesisService) { }
+ constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
+
+
 
   ngOnInit(): void {
      this.userService.getStudentFeatures().subscribe(
@@ -33,20 +38,41 @@ export class AddThesisComponent implements OnInit {
          this.content = JSON.parse(err.error).message;
        }
      );
+
+     if (this.tokenStorage.getToken()) {
+        this.user = this.tokenStorage.getUser();
+        console.log("Id Usera zalogowanego: " + this.user.id)
+
+     }
    }
 
    onSubmit(): void {
       this.thesisService.createThesis(this.form).subscribe(
         data => {
-          console.log(data);
+          this.addedThesis = data;
+          console.log("Id Thesis dodanej: " + this.addedThesis.id);
           this.isSuccessful = true;
           this.isAddingFailed = false;
+          this.thesisService.createStudentHasThesis(this.addedThesis.id, this.user.id).subscribe(
+               data => {
+
+               },
+               err => {
+                  console.log(err);
+               }
+             );
         },
         err => {
           this.errorMessage = err.error.message;
           this.isAddingFailed = true;
         }
    );
+
+
+
+
+
+
  }
 }
 

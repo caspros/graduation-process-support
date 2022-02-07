@@ -6,16 +6,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(	name = "thesis" )
 public class Thesis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_thesis;
+    private int id;
+
+    @ManyToMany (mappedBy = "thesisEnrolled", cascade = CascadeType.ALL)
+    private Collection<User> students = new ArrayList<>();
 
     @NotBlank
     @Size(max = 255)
@@ -38,13 +39,6 @@ public class Thesis {
     @CreatedDate
     private Date creation_date;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "student_has_thesis",
-            joinColumns = @JoinColumn(name = "id_thesis"),
-            inverseJoinColumns = @JoinColumn(name = "id_user"))
-
-    private Set<User> users = new HashSet<>();
-
     public Thesis() {
     }
 
@@ -53,12 +47,12 @@ public class Thesis {
         this.title_eng = title_eng;
     }
 
-    public int getId_thesis() {
-        return id_thesis;
+    public int getId() {
+        return id;
     }
 
-    public void setId_thesis(int id_thesis) {
-        this.id_thesis = id_thesis;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle_pl() {
@@ -107,5 +101,13 @@ public class Thesis {
 
     public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
+    }
+
+    public Collection<User> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Collection<User> students) {
+        this.students = students;
     }
 }

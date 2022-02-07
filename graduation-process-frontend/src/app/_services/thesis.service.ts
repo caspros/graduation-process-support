@@ -31,16 +31,22 @@ export class ThesisService {
 
       if (this.tokenStorage.getToken()) {
             this.user = this.tokenStorage.getUser();
-            //thesis.id_student = this.user.id;
      }
       thesis.creation_date = new Date()
       thesis.type = "magisterska"
       thesis.status = "zgłoszona"
 
-      console.log(thesis)
-      console.log(this.user.id)
-      return this.httpClient.post(`${this.baseURLCreateThesis}`, thesis, this.user.id);
+      return this.httpClient.post(`${this.baseURLCreateThesis}`, thesis);
     }
+
+    createStudentHasThesis(id_thesis: number, id_student: number): Observable<Object>{
+        if (this.tokenStorage.getToken()) {
+              this.user = this.tokenStorage.getUser();
+       }
+
+        const body = { title: 'Angular PUT Request Example' };
+        return this.httpClient.put(`${this.baseURL}/${id_thesis}/students/${id_student}`, body);
+      }
 
     getThesisById(id: number): Observable<Thesis>{
       return this.httpClient.get<Thesis>(`${this.baseURL}/${id}`);
@@ -57,17 +63,6 @@ export class ThesisService {
     deleteThesis(id: number): Observable<Object>{
       return this.httpClient.delete(`${this.baseURL}/${id}`);
     }
-
-  /*constructor(private http: HttpClient) { }
-
-  add(data: any): Observable<any> {
-    return this.http.post(AUTH_API + 'add', {
-      title_pl: data.title_pl,
-      title_eng: data.title_eng,
-      short_description: data.short_description,
-      promoter: data.promoter,
-    }, httpOptions);
-  }*/
 
 }
 

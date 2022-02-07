@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Sty 2022, 23:46
+-- Czas generowania: 15 Sty 2022, 17:31
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -71,6 +71,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 (5, 'ROLE_PROGRAM_COMMISSION'),
 (6, 'ROLE_DEANS_REPRESENTATIVE');
 
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +103,7 @@ CREATE TABLE `student_has_thesis` (
 --
 
 CREATE TABLE `thesis` (
-  `id_thesis` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `title_pl` varchar(255) DEFAULT NULL,
   `title_eng` varchar(255) DEFAULT NULL,
   `short_description` text DEFAULT NULL,
@@ -145,9 +146,9 @@ CREATE TABLE `users` (
   `password` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Zrzut danych tabeli `users`
---
+
+
+-- Dane do tabeli users
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (1, 'admin@admin.com', '$2a$10$GHYNtzSHWEUr8dFY4xVJKOheDErjOxaGmWEDKTGJL8mq0jYgyW68e'),
@@ -163,6 +164,8 @@ INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (11, '222222@student.pwr.edu.pl', '$2a$10$G0zwdkK9haa6iq5cFuAi8e8IxmHghk4vEvFoS/l7hIP6ajjtr0Xwy'),
 (12, '333333@student.pwr.edu.pl', '$2a$10$tR2Pw.xOctLtgRHNKExOmOUZ99VRLDAMnCgVOqOnlXwfPics0bW1q'),
 (13, '444444@student.pwr.edu.pl', '$2a$10$1XrWvrczvXEH.27l0w4A4.CAMZxvn6KXh2ULw84a0PTdLh1.Ma6dq');
+
+
 
 -- --------------------------------------------------------
 
@@ -205,9 +208,8 @@ CREATE TABLE `user_has_role` (
   `user_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Zrzut danych tabeli `user_has_role`
---
+
+-- role dla userow
 
 INSERT INTO `user_has_role` (`role_id`, `user_id`) VALUES
 (2, 1),
@@ -223,7 +225,6 @@ INSERT INTO `user_has_role` (`role_id`, `user_id`) VALUES
 (3, 11),
 (3, 12),
 (3, 13);
-
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -267,7 +268,7 @@ ALTER TABLE `student_has_thesis`
 -- Indeksy dla tabeli `thesis`
 --
 ALTER TABLE `thesis`
-  ADD PRIMARY KEY (`id_thesis`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `thesis_has_promoter`
@@ -287,8 +288,7 @@ ALTER TABLE `thesis_has_reviewer`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `users_details`
@@ -327,13 +327,13 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT dla tabeli `thesis`
 --
 ALTER TABLE `thesis`
-  MODIFY `id_thesis` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `users_details`
@@ -355,7 +355,7 @@ ALTER TABLE `user_has_reported_thesis`
 -- Ograniczenia dla tabeli `reviews`
 --
 ALTER TABLE `reviews`
-  ADD CONSTRAINT `id_thesis_fk_r` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_thesis_fk_r` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk_r` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -369,21 +369,21 @@ ALTER TABLE `student_has_field_of_study`
 -- Ograniczenia dla tabeli `student_has_thesis`
 --
 ALTER TABLE `student_has_thesis`
-  ADD CONSTRAINT `id_thesis_fk_sht` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_thesis_fk_sht` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk_sht` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `thesis_has_promoter`
 --
 ALTER TABLE `thesis_has_promoter`
-  ADD CONSTRAINT `id_thesis_fk1` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_thesis_fk1` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `thesis_has_reviewer`
 --
 ALTER TABLE `thesis_has_reviewer`
-  ADD CONSTRAINT `id_thesis_fk2` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_thesis_fk2` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -396,7 +396,7 @@ ALTER TABLE `users_details`
 -- Ograniczenia dla tabeli `user_has_reported_thesis`
 --
 ALTER TABLE `user_has_reported_thesis`
-  ADD CONSTRAINT `id_thesis_fk_uhrt` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id_thesis`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `id_thesis_fk_uhrt` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk_uhrt` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

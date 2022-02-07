@@ -4,21 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.graduationprocessbackend.model.User;
 import com.example.graduationprocessbackend.repository.ThesisRepository;
+import com.example.graduationprocessbackend.repository.StudentHasThesisRepository;
+import com.example.graduationprocessbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.graduationprocessbackend.exception.ResourceNotFoundException;
 import com.example.graduationprocessbackend.model.Thesis;
@@ -28,13 +20,14 @@ import com.example.graduationprocessbackend.model.Thesis;
 @RequestMapping("/api/")
 public class ThesisController {
 
-//    @Autowired
-//    private Environment env;
-//
-//    String frontendUrl = env.getProperty("graduationprocessbackend.app.frontendUrl");
-
     @Autowired
     private ThesisRepository thesisRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private StudentHasThesisRepository studentHasThesisRepository;
 
     // get all thesis
     @GetMapping("/thesis")
@@ -42,10 +35,25 @@ public class ThesisController {
         return thesisRepository.findAll();
     }
 
+    @PutMapping("/thesis/{thesisId}/students/{studentId}")
+    Thesis enrollStudentToThesis(
+            @PathVariable int thesisId,
+            @PathVariable int studentId
+    ) {
+        Thesis thesis = thesisRepository.findById(thesisId)
+                .orElseThrow(() -> new ResourceNotFoundException("Thesis not exist with id :" + thesisId));
+        User student = userRepository.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student not exist with id :" + studentId));
+//        System.out.println("Thesis: " + thesis);
+//        System.out.println("Student: " + student);
+
+        studentHasThesisRepository.addStudentHasThesis(studentId, thesisId);
+        return thesisRepository.save(thesis);
+    }
+
     // create thesis rest api
     @PostMapping("/create-thesis")
     public Thesis createThesis(@RequestBody Thesis thesis) {
-        //System.out.println(id_student);
         return thesisRepository.save(thesis);
     }
 
@@ -58,7 +66,6 @@ public class ThesisController {
     }
 
     // update thesis rest api
-
     @PutMapping("/thesis/{id}")
     public ResponseEntity<Thesis> updateThesis(@PathVariable int id, @RequestBody Thesis thesisDetails){
         Thesis thesis = thesisRepository.findById(id)
