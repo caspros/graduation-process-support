@@ -14,14 +14,14 @@ export class ThesisListComponent implements OnInit {
 
   ngOnInit(): void {
     this.thesisService.getAllThesis().subscribe(
-            data => {
-              console.log(data);
-              this.thesis = data;
-            },
-            err => {
-              console.log(err);
-            }
-       );
+        data => {
+          console.log(data);
+          this.thesis = data;
+        },
+        err => {
+          console.log(err);
+        }
+   );
   }
 
 }

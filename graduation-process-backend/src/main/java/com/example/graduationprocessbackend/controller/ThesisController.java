@@ -3,15 +3,15 @@ package com.example.graduationprocessbackend.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import com.example.graduationprocessbackend.model.AcademicWorker;
 import com.example.graduationprocessbackend.model.User;
+import com.example.graduationprocessbackend.repository.AcademicWorkerRepository;
 import com.example.graduationprocessbackend.repository.ThesisRepository;
 import com.example.graduationprocessbackend.repository.StudentHasThesisRepository;
 import com.example.graduationprocessbackend.repository.UserRepository;
-import com.example.graduationprocessbackend.security.jwt.AuthTokenFilter;
-import com.example.graduationprocessbackend.security.jwt.JwtUtils;
 import com.example.graduationprocessbackend.security.services.UserDetailsImpl;
-import com.example.graduationprocessbackend.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,6 +34,9 @@ public class ThesisController {
 
     @Autowired
     private StudentHasThesisRepository studentHasThesisRepository;
+
+    @Autowired
+    private AcademicWorkerRepository academicWorkerRepository;
 
     // get all thesis
     @GetMapping("/thesis")
@@ -101,5 +104,21 @@ public class ThesisController {
         return ResponseEntity.ok(response);
     }
 
+    // get available promoters
+    @GetMapping("/thesis/promoters")
+    public List<AcademicWorker> getAvailablePromoters(){
+        System.out.println(academicWorkerRepository.findAvailableAcademicWorkers());
+        return academicWorkerRepository.findAvailableAcademicWorkers();
+        //return thesisRepository.findAll();
+    }
+
+    @PutMapping("/thesis/{thesisId}/promoters/{promoterId}")
+    Boolean enrollPromoterToThesis(
+            @PathVariable int thesisId,
+            @PathVariable int promoterId
+    ) {
+        academicWorkerRepository.addThesisHasPromoter(thesisId, promoterId);
+        return true;
+    }
 
 }

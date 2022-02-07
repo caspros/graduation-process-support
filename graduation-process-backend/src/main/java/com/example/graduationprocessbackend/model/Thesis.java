@@ -18,6 +18,9 @@ public class Thesis {
     @ManyToMany (mappedBy = "thesisEnrolled", cascade = CascadeType.ALL)
     private Collection<User> students = new ArrayList<>();
 
+    @ManyToMany (mappedBy = "thesisEnrolledToPromoters", cascade = CascadeType.ALL)
+    private Collection<AcademicWorker> promoters = new ArrayList<>();
+
     @NotBlank
     @Size(max = 255)
     private String title_pl;

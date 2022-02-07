@@ -18,6 +18,7 @@ const httpOptions = {
 })
 export class ThesisService {
   private baseURL = backendURL + '/api/thesis';
+  private promotersURL = this.baseURL + '/promoters';
   private baseURLCreateThesis = backendURL + '/api/create-thesis';
   private user: any;
 
@@ -30,7 +31,7 @@ export class ThesisService {
     createThesis(thesis: Thesis): Observable<Object>{
 
       if (this.tokenStorage.getToken()) {
-            this.user = this.tokenStorage.getUser();
+         this.user = this.tokenStorage.getUser();
      }
       thesis.creation_date = new Date()
       thesis.type = "magisterska"
@@ -43,9 +44,13 @@ export class ThesisService {
         if (this.tokenStorage.getToken()) {
               this.user = this.tokenStorage.getUser();
        }
-
         const body = { title: 'Angular PUT Request Example' };
         return this.httpClient.put(`${this.baseURL}/${id_thesis}/students/${id_student}`, body);
+      }
+
+    createThesisHasPromoter(id_thesis: number, id_promoter: number): Observable<Object>{
+        const body = { title: 'Angular PUT Request Example' };
+        return this.httpClient.put(`${this.baseURL}/${id_thesis}/promoters/${id_promoter}`, body);
       }
 
     getThesisById(id: number): Observable<Thesis>{
@@ -62,6 +67,10 @@ export class ThesisService {
 
     deleteThesis(id: number): Observable<Object>{
       return this.httpClient.delete(`${this.baseURL}/${id}`);
+    }
+
+    getAvailablePromoters(): Observable<Object>{
+      return this.httpClient.get<Object>(`${this.promotersURL}`);
     }
 
 }

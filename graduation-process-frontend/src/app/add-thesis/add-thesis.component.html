@@ -63,16 +63,8 @@
 
         <div class="form-group">
           <label for="promoter">Wybierz promotora</label>
-          <select multiple class="form-control" id="promoter" name="promoter">
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
-            <option>Dr inż. Adam Adamski</option>
+          <select class="form-control" id="promoter" name="promoter" ng-options="promoters" [(ngModel)]="form.promoter">
+            <option *ngFor="let promoter of promoters" [ngValue]="promoter.id_user">{{promoter.id_user}} {{promoter.science_title}} {{promoter.first_name}} {{promoter.last_name}}</option>
           </select>
         </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Sty 2022, 17:31
+-- Czas generowania: 07 Lut 2022, 23:14
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `dyplomowanie_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `academic_worker`
+--
+
+CREATE TABLE `academic_worker` (
+  `id_user` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `science_title` varchar(45) NOT NULL,
+  `salary` int(45) NOT NULL,
+  `working_hours_amount` int(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `academic_worker`
+--
+
+INSERT INTO `academic_worker` (`id_user`, `first_name`, `last_name`, `science_title`, `salary`, `working_hours_amount`) VALUES
+(4, 'Adam', 'Adamski', 'Dr inż.', 140, 60),
+(6, 'Barbara', 'Barbarska', 'Dr inż.', 140, 60),
+(7, 'Celina', 'Celinowska', 'Dr inż.', 140, 60),
+(8, 'Dariusz', 'Dariuszowski', 'Dr inż.', 140, 60),
+(9, 'Eugeniusz', 'Eugeniowski', 'Dr inż.', 140, 60),
+(10, 'Faustyna', 'Faustynowska', 'Dr inż.', 140, 60);
 
 -- --------------------------------------------------------
 
@@ -71,7 +98,6 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 (5, 'ROLE_PROGRAM_COMMISSION'),
 (6, 'ROLE_DEANS_REPRESENTATIVE');
 
-
 -- --------------------------------------------------------
 
 --
@@ -91,10 +117,9 @@ CREATE TABLE `student_has_field_of_study` (
 --
 
 CREATE TABLE `student_has_thesis` (
-  `id_user` int(11) NOT NULL,
-  `id_thesis` int(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `user_id` int(11) NOT NULL,
+  `thesis_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -112,6 +137,8 @@ CREATE TABLE `thesis` (
   `creation_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +149,7 @@ CREATE TABLE `thesis_has_promoter` (
   `id_thesis` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- --------------------------------------------------------
 
@@ -146,9 +174,9 @@ CREATE TABLE `users` (
   `password` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
--- Dane do tabeli users
+--
+-- Zrzut danych tabeli `users`
+--
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (1, 'admin@admin.com', '$2a$10$GHYNtzSHWEUr8dFY4xVJKOheDErjOxaGmWEDKTGJL8mq0jYgyW68e'),
@@ -164,8 +192,6 @@ INSERT INTO `users` (`id`, `email`, `password`) VALUES
 (11, '222222@student.pwr.edu.pl', '$2a$10$G0zwdkK9haa6iq5cFuAi8e8IxmHghk4vEvFoS/l7hIP6ajjtr0Xwy'),
 (12, '333333@student.pwr.edu.pl', '$2a$10$tR2Pw.xOctLtgRHNKExOmOUZ99VRLDAMnCgVOqOnlXwfPics0bW1q'),
 (13, '444444@student.pwr.edu.pl', '$2a$10$1XrWvrczvXEH.27l0w4A4.CAMZxvn6KXh2ULw84a0PTdLh1.Ma6dq');
-
-
 
 -- --------------------------------------------------------
 
@@ -208,8 +234,9 @@ CREATE TABLE `user_has_role` (
   `user_id` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
--- role dla userow
+--
+-- Zrzut danych tabeli `user_has_role`
+--
 
 INSERT INTO `user_has_role` (`role_id`, `user_id`) VALUES
 (2, 1),
@@ -225,9 +252,16 @@ INSERT INTO `user_has_role` (`role_id`, `user_id`) VALUES
 (3, 11),
 (3, 12),
 (3, 13);
+
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `academic_worker`
+--
+ALTER TABLE `academic_worker`
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- Indeksy dla tabeli `field_of_study`
@@ -261,8 +295,8 @@ ALTER TABLE `student_has_field_of_study`
 -- Indeksy dla tabeli `student_has_thesis`
 --
 ALTER TABLE `student_has_thesis`
-  ADD PRIMARY KEY (`id_user`),
-  ADD KEY `id_thesis_fk_sht_idx` (`id_thesis`);
+  ADD KEY `FK1wncameiqixwehvng7fbutvl8` (`thesis_id`),
+  ADD KEY `FK8o3u6a7h0ugdqlhi0e0al2dhx` (`user_id`);
 
 --
 -- Indeksy dla tabeli `thesis`
@@ -288,7 +322,8 @@ ALTER TABLE `thesis_has_reviewer`
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`);
 
 --
 -- Indeksy dla tabeli `users_details`
@@ -327,13 +362,13 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT dla tabeli `thesis`
 --
 ALTER TABLE `thesis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT dla tabeli `users_details`
@@ -350,6 +385,12 @@ ALTER TABLE `user_has_reported_thesis`
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `academic_worker`
+--
+ALTER TABLE `academic_worker`
+  ADD CONSTRAINT `aw_fk` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `reviews`
@@ -369,13 +410,14 @@ ALTER TABLE `student_has_field_of_study`
 -- Ograniczenia dla tabeli `student_has_thesis`
 --
 ALTER TABLE `student_has_thesis`
-  ADD CONSTRAINT `id_thesis_fk_sht` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `id_user_fk_sht` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK1wncameiqixwehvng7fbutvl8` FOREIGN KEY (`thesis_id`) REFERENCES `thesis` (`id`),
+  ADD CONSTRAINT `FK8o3u6a7h0ugdqlhi0e0al2dhx` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ograniczenia dla tabeli `thesis_has_promoter`
 --
 ALTER TABLE `thesis_has_promoter`
+  ADD CONSTRAINT `FKeqlutjm87f5tduv9a0r176onc` FOREIGN KEY (`id_user`) REFERENCES `academic_worker` (`id_user`),
   ADD CONSTRAINT `id_thesis_fk1` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

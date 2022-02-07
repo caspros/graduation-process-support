@@ -23,10 +23,9 @@ export class AddThesisComponent implements OnInit {
   status = 'zgłoszona';
   private addedThesis: any = {};
   private user: any;
+  promoters: any = {};
 
  constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
-
-
 
   ngOnInit(): void {
      this.userService.getStudentFeatures().subscribe(
@@ -42,37 +41,43 @@ export class AddThesisComponent implements OnInit {
      if (this.tokenStorage.getToken()) {
         this.user = this.tokenStorage.getUser();
         console.log("Id Usera zalogowanego: " + this.user.id)
-
+        this.getAvailablePromoters();
      }
+
    }
 
    onSubmit(): void {
+      console.log("promoter id = " + this.form.promoter);
       this.thesisService.createThesis(this.form).subscribe(
         data => {
           this.addedThesis = data;
           console.log("Id Thesis dodanej: " + this.addedThesis.id);
           this.isSuccessful = true;
           this.isAddingFailed = false;
-          this.thesisService.createStudentHasThesis(this.addedThesis.id, this.user.id).subscribe(
-               data => {
-
-               },
-               err => {
-                  console.log(err);
-               }
-             );
+          this.thesisService.createStudentHasThesis(this.addedThesis.id, this.user.id).subscribe(data => {},
+             err => { console.log(err);} );
+          this.thesisService.createThesisHasPromoter(this.addedThesis.id, this.form.promoter).subscribe(data => {},
+             err => { console.log(err);} );
         },
         err => {
           this.errorMessage = err.error.message;
           this.isAddingFailed = true;
         }
    );
-
-
-
-
-
-
  }
+
+  getAvailablePromoters(): void {
+     this.thesisService.getAvailablePromoters().subscribe(
+         data => {
+           this.promoters = data;
+           console.log(data);
+         },
+         err => {
+           console.log(err);
+         }
+    );
+   }
+
+
 }
 
