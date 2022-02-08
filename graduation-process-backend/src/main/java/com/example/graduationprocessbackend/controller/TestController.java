@@ -50,4 +50,8 @@ public class TestController {
 	public String universityemployeeAccess() {
 		return "Employye Board.";
 	}
+
+	@GetMapping("/deansrepresenative")
+	@PreAuthorize("hasRole('ROLE_DEANS_REPRESENTATIVE')")
+	public String deansrepresenativeAccess() { return "Deans Board."; }
 }

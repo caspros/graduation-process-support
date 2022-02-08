@@ -35,4 +35,7 @@ export class UserService {
   getUniversityEmployeeFeatures(): Observable<any> {
     return this.http.get(API_URL + 'universityemployee', { responseType: 'text' });
   }
+  getDeansRepresenativeFeatures(): Observable<any> {
+    return this.http.get(API_URL + 'deansrepresenative', { responseType: 'text' });
+  }
 }

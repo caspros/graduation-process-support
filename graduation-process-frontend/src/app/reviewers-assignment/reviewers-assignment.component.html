@@ -14,47 +14,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Przykładowy temat pracy dyplomowej 1</td>
-      <td>111111@student.pwr.edu.pl</td>
+    <tr *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td> class="text-center">{{ item.title_pl }}</td>
+      <td> Imie Nazwisko</td>
       <td>Dr inż. Adam Adamski</td>
       <div class="form-group">
-        <select class="form-control" id="promoter1" name="promoter">
-          <option>Wybierz recenzenta</option>
-          <option>Dr inż. Celina Celinowska</option>
-          <option>Dr inż. Zbigniew Zbigniewski</option>
-          <option>Dr inż. Jan Janowski</option>
-        </select>
-      </div>
-      <td><div class="btn btn-primary">Przydziel</div></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Przykładowy temat pracy dyplomowej 2</td>
-      <td>222222@student.pwr.edu.pl</td>
-      <td>Dr inż. Adam Adamski</td>
-      <div class="form-group">
-        <select class="form-control" id="promoter2" name="promoter">
-          <option>Wybierz recenzenta</option>
-          <option>Dr inż. Celina Celinowska</option>
-          <option>Dr inż. Zbigniew Zbigniewski</option>
-          <option>Dr inż. Jan Janowski</option>
-        </select>
-      </div>
-      <td><div class="btn btn-primary">Przydziel</div></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Przykładowy temat pracy dyplomowej 3</td>
-      <td>333333@student.pwr.edu.pl</td>
-      <td>Dr inż. Adam Adamski</td>
-      <div class="form-group">
-        <select class="form-control" id="promoter3" name="promoter">
-          <option>Wybierz recenzenta</option>
-          <option>Dr inż. Celina Celinowska</option>
-          <option>Dr inż. Zbigniew Zbigniewski</option>
-          <option>Dr inż. Jan Janowski</option>
+        <label for="promoter">Wybierz promotora</label>
+        <select class="form-control" id="promoter" name="promoter" ng-options="promoters" [(ngModel)]="form.promoter">
+          <option *ngFor="let promoter of promoters" [ngValue]="promoter.id_user">{{promoter.id_user}} {{promoter.science_title}} {{promoter.first_name}} {{promoter.last_name}}</option>
         </select>
       </div>
       <td><div class="btn btn-primary">Przydziel</div></td>

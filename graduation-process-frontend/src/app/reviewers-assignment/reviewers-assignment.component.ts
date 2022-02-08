@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { UserService } from '../_services/user.service';
+import { ThesisService } from '../_services/thesis.service';
+import { Error401Component } from '../common/error401/error401.component';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-reviewers-assignment',
@@ -7,9 +12,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewersAssignmentComponent implements OnInit {
 
-  constructor() { }
+  form: any = {};
+  content: string;
+  authorized = false;
+  promoters: any = {};
+  private user: any;
+  thesis: any = {}
+
+  constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.userService.getDeansRepresenativeFeatures().subscribe(
+      data => {
+        //this.content = data;
+        console.log("Id proba Usera zalogowanego: " + this.user.id)
+        this.authorized = true;
+        this.thesisService.getAllThesis().subscribe(
+          data => {
+            console.log(data);
+            this.thesis = data;
+
+            this.thesis.forEach((item: any) => {
+              item.isSelected = false;
+            });
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+
+    if (this.tokenStorage.getToken()) {
+      this.user = this.tokenStorage.getUser();
+      console.log("Id Usera zalogowanego: " + this.user.id)
+      this.getAvailablePromoters();
+    }
   }
 
+  getAvailablePromoters(): void {
+    this.thesisService.getAvailablePromoters().subscribe(
+      data => {
+        this.promoters = data;
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }
