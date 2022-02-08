@@ -10,13 +10,13 @@ export class ReviewListComponent implements OnInit {
 
   constructor(private reviewsService: ReviewsService) { }
 
-  reviews: any = {}
+  thesis: any = {}
 
   ngOnInit(): void {
-    this.reviewsService.getAllReviews().subscribe(
+    this.reviewsService.getThesisReportedByPromoter().subscribe(
       data => {
         console.log(data);
-        this.reviews = data;
+        this.thesis = data;
       },
       err => {
         console.log(err);

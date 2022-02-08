@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 import { Reviews } from '../_classes/reviews'
+import { Thesis } from '../_classes/thesis'
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { environment } from '../../environments/environment'
@@ -18,6 +19,7 @@ const httpOptions = {
 })
 export class ReviewsService {
   private baseURL = backendURL + '/api/reviews';
+  private baseThesisURL = backendURL + '/api/thesis';
   private baseURLCreateReviews = backendURL + '/api/create-reviews';
   private user: any;
 
@@ -26,6 +28,10 @@ export class ReviewsService {
   getThesisList(): Observable<Reviews[]>{
     return this.httpClient.get<Reviews[]>(`${this.baseURL}`);
   }
+
+  getThesisReportedByPromoter(): Observable<Thesis[]>{
+   return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-promoter`);
+ }
 
   createReviews(reviews: Reviews): Observable<Object>{
 

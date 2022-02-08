@@ -14,13 +14,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of reviews; let i = index" [attr.data-index]="i">
+    <tr *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ item.title_pl }}</td>
-      <td>{{ item.first_name }}</td> <!--first_name, last_name, album_nr z użytkownika -->
+      <td>
+        <span *ngIf="item.students.length > 0; else NoStudent">{{ item.students[0].email }}</span>
+        <ng-template #NoStudent>brak przypisanego studenta</ng-template>
+      </td>
       <td>{{ item.status }}</td> <!--status któego nie ma -->
       <td>{{ item.creation_date.substring(0,10) }}</td>
-      <td><div class="btn btn-primary">Zrecenzuj</div></td> <!--// if status=zrecenzowana "Podgląd -->
+      <td> <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
     </tr>
     </tbody>
   </table>
