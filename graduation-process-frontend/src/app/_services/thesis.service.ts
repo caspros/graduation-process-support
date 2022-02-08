@@ -18,14 +18,24 @@ const httpOptions = {
 })
 export class ThesisService {
   private baseURL = backendURL + '/api/thesis';
+  private basePromoterURL = backendURL + '/api/thesis-promoter';
+  private baseAllURL = backendURL + '/api/thesis-all';
   private promotersURL = this.baseURL + '/promoters';
   private baseURLCreateThesis = backendURL + '/api/create-thesis';
   private user: any;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
-    getThesisList(): Observable<Thesis[]>{
+    getThesisForLoggedStudent(): Observable<Thesis[]>{
       return this.httpClient.get<Thesis[]>(`${this.baseURL}`);
+    }
+
+    getThesisReportedByPromoter(): Observable<Thesis[]>{
+     return this.httpClient.get<Thesis[]>(`${this.baseURL}-promoter`);
+   }
+
+    getAllThesis(): Observable<Thesis[]>{
+      return this.httpClient.get<Thesis[]>(`${this.baseAllURL}`);
     }
 
     createThesis(thesis: Thesis): Observable<Object>{
@@ -55,10 +65,6 @@ export class ThesisService {
 
     getThesisById(id: number): Observable<Thesis>{
       return this.httpClient.get<Thesis>(`${this.baseURL}/${id}`);
-    }
-
-    getAllThesis(): Observable<Thesis>{
-      return this.httpClient.get<Thesis>(`${this.baseURL}`);
     }
 
     updateThesis(id: number, thesis: Thesis): Observable<Object>{

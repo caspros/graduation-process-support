@@ -38,12 +38,26 @@ public class ThesisController {
     @Autowired
     private AcademicWorkerRepository academicWorkerRepository;
 
-    // get all thesis
+    // get all thesis for logged student
     @GetMapping("/thesis")
     public List<Thesis> getAllThesis(@AuthenticationPrincipal UserDetailsImpl user){
         System.out.println("Id zalogowanego usera: " + user.getId());
         return thesisRepository.findByUserId(user.getId());
         //return thesisRepository.findAll();
+    }
+
+    // get all thesis for promoter
+    @GetMapping("/thesis-promoter")
+    public List<Thesis> getPromoterThesis(@AuthenticationPrincipal UserDetailsImpl user){
+        System.out.println("Id zalogowanego promotora: " + user.getId());
+        return thesisRepository.findByPromoterId(user.getId());
+        //return thesisRepository.findAll();
+    }
+
+    // get all thesis
+    @GetMapping("/thesis-all")
+    public List<Thesis> getAllThesis(){
+        return thesisRepository.findAll();
     }
 
     @PutMapping("/thesis/{thesisId}/students/{studentId}")

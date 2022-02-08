@@ -113,4 +113,12 @@ public class Thesis {
     public void setStudents(Collection<User> students) {
         this.students = students;
     }
+
+    public Collection<AcademicWorker> getPromoters() {
+        return promoters;
+    }
+
+    public void setPromoters(Collection<AcademicWorker> promoters) {
+        this.promoters = promoters;
+    }
 }

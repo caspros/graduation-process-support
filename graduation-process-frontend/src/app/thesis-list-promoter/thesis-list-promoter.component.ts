@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ThesisService } from '../_services/thesis.service';
 
 @Component({
-  selector: 'app-thesis-list',
-  templateUrl: './thesis-list.component.html',
-  styleUrls: ['./thesis-list.component.css']
+  selector: 'app-thesis-list-promoter',
+  templateUrl: './thesis-list-promoter.component.html',
+  styleUrls: ['./thesis-list-promoter.component.css']
 })
-export class ThesisListComponent implements OnInit {
+export class ThesisListPromoterComponent implements OnInit {
 
   constructor(private thesisService: ThesisService) { }
 
   thesis: any = {}
 
   ngOnInit(): void {
-    this.thesisService.getThesisForLoggedStudent().subscribe(
+    this.thesisService.getThesisReportedByPromoter().subscribe(
         data => {
           console.log(data);
           this.thesis = data;

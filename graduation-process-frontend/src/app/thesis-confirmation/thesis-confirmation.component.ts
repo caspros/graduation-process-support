@@ -50,9 +50,7 @@ export class ThesisConfirmationComponent implements OnInit {
          this.authorized = true;
          this.thesisService.getAllThesis().subscribe(
                data => {
-                 console.log(data);
                  this.thesis = data;
-
                  this.thesis.forEach((item: any) => {
                    item.isSelected = false;
                  });
@@ -71,7 +69,7 @@ export class ThesisConfirmationComponent implements OnInit {
 
     onSubmit(): void {
     this.checkedList.forEach((item: any) => {
-      let id = item.id_thesis - 1;
+      let id = item.id - 1;
       console.log(this.thesis)
       this.thesis[id].status = "zaakceptowana"
       this.thesisService.updateThesis(id + 1, this.thesis[id]).subscribe(

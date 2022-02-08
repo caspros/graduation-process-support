@@ -9,4 +9,6 @@ import java.util.List;
 public interface ThesisRepository extends JpaRepository<Thesis, Integer> {
     @Query(value = "SELECT * FROM student_has_thesis sht JOIN thesis t WHERE sht.user_id = ?1 AND sht.thesis_id = t.id" , nativeQuery = true)
     List<Thesis> findByUserId(Integer id);
+    @Query(value = "SELECT * FROM thesis_has_promoter thp JOIN thesis t WHERE thp.id_user = ?1 AND thp.id_thesis = t.id" , nativeQuery = true)
+    List<Thesis> findByPromoterId(Integer id);
 }
