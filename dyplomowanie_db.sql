@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 07 Lut 2022, 23:14
+-- Czas generowania: 09 Lut 2022, 00:15
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -49,21 +49,6 @@ INSERT INTO `academic_worker` (`id_user`, `first_name`, `last_name`, `science_ti
 (10, 'Faustyna', 'Faustynowska', 'Dr inż.', 140, 60);
 
 -- --------------------------------------------------------
-
-CREATE TABLE `students` (
-  `id_user` int(11) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-INSERT INTO `students` (`id_user`, `first_name`, `last_name`) VALUES
-(5, 'Ewelina', 'Trefl'),
-(11, 'Kacper', 'Kacperowski'),
-(12, 'Aleksander', 'Aleksandrowski'),
-(13, 'Tobiasz', 'Tobiaszowski');
-
-
 
 --
 -- Struktura tabeli dla tabeli `field_of_study`
@@ -116,6 +101,28 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `students`
+--
+
+CREATE TABLE `students` (
+  `id_user` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `students`
+--
+
+INSERT INTO `students` (`id_user`, `first_name`, `last_name`) VALUES
+(5, 'Ewelina', 'Trefl'),
+(11, 'Kacper', 'Kacperowski'),
+(12, 'Aleksander', 'Aleksandrowski'),
+(13, 'Tobiasz', 'Tobiaszowski');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `student_has_field_of_study`
 --
 
@@ -136,6 +143,23 @@ CREATE TABLE `student_has_thesis` (
   `thesis_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Zrzut danych tabeli `student_has_thesis`
+--
+
+INSERT INTO `student_has_thesis` (`user_id`, `thesis_id`) VALUES
+(5, 30),
+(5, 31),
+(11, 32),
+(11, 33),
+(11, 34),
+(11, 35),
+(5, 36),
+(5, 37),
+(5, 38),
+(5, 39),
+(5, 40);
+
 -- --------------------------------------------------------
 
 --
@@ -152,7 +176,25 @@ CREATE TABLE `thesis` (
   `creation_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `thesis`
+--
 
+INSERT INTO `thesis` (`id`, `title_pl`, `title_eng`, `short_description`, `type`, `status`, `creation_date`) VALUES
+(30, 'Cumque facere illo e', 'Illo duis velit eum ', 'Porro officia rerum ', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(31, 'Corporis dolor exped', 'Nostrum facere sit ', 'Consequatur eu labor', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(32, 'Non omnis sint libe', 'Adipisicing velit en', 'Mollit aut aut disti', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(33, 'Testowy temat w języku polskim', 'Et veniam omnis ut ', 'adsdsad', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(34, 'Testowy temat w języku polskim', 'Test', 'adsadsa', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(35, 'Testowy temat w języku polskim22222', 'Testowy temat w języku angielskim22222', 'Opis w języku angielskim22222', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(36, 'adssad', 'asdsadsa', 'dasdasd', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(37, 'Testowy temat w języku polskim', 'Et veniam omnis ut ', 'dadsa', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(38, 'Ullamco culpa quia ', 'Tenetur accusantium ', 'Facilis ut hic ad qu', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(39, 'Quia obcaecati est q', 'Expedita suscipit vo', 'Omnis sed aut et est', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(40, 'Dolore sed perferend', 'Commodi corporis vit', 'Voluptatibus nulla a', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(41, 'Temat zgłaszany przez promotora', 'Temat zgłaszany przez promotora EN', 'Temat zgłaszany przez promotora OPIS', 'magisterska', 'zgłoszona', '2022-02-08'),
+(42, 'Testowy temat w języku polskim promotor', 'Testowy temat w języku polskim promotor', 'Testowy temat w języku polskim promotor', 'magisterska', 'zgłoszona', '2022-02-08'),
+(43, 'PROMROMTOMRTORM', 'PROMROMTOMRTORM', 'PROMROMTOMRTORM', 'magisterska', 'zgłoszona', '2022-02-08');
 
 -- --------------------------------------------------------
 
@@ -165,6 +207,24 @@ CREATE TABLE `thesis_has_promoter` (
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Zrzut danych tabeli `thesis_has_promoter`
+--
+
+INSERT INTO `thesis_has_promoter` (`id_thesis`, `id_user`) VALUES
+(30, 6),
+(32, 6),
+(35, 6),
+(37, 6),
+(31, 7),
+(33, 8),
+(38, 8),
+(40, 8),
+(42, 8),
+(43, 8),
+(34, 9),
+(39, 9),
+(36, 10);
 
 -- --------------------------------------------------------
 
@@ -299,6 +359,12 @@ ALTER TABLE `roles`
   ADD KEY `role_id_index` (`id`);
 
 --
+-- Indeksy dla tabeli `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- Indeksy dla tabeli `student_has_field_of_study`
 --
 ALTER TABLE `student_has_field_of_study`
@@ -377,7 +443,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT dla tabeli `thesis`
 --
 ALTER TABLE `thesis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
@@ -413,6 +479,12 @@ ALTER TABLE `academic_worker`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `id_thesis_fk_r` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk_r` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ograniczenia dla tabeli `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `fk_user_id_student` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ograniczenia dla tabeli `student_has_field_of_study`
