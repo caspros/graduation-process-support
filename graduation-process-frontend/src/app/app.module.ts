@@ -18,6 +18,8 @@ import { ReviewersAssignmentComponent } from './reviewers-assignment/reviewers-a
 import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confirmation.component';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { ThesisListPromoterComponent } from './thesis-list-promoter/thesis-list-promoter.component';
+import { AddThesisPromoterComponent } from './add-thesis-promoter/add-thesis-promoter.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { AddReviewComponent } from './add-review/add-review.component';
     ThesisConfirmationComponent,
     ReviewListComponent,
     AddReviewComponent,
+    ThesisListPromoterComponent,
+    AddThesisPromoterComponent,
   ],
   imports: [
     BrowserModule,

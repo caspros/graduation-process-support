@@ -50,6 +50,21 @@ INSERT INTO `academic_worker` (`id_user`, `first_name`, `last_name`, `science_ti
 
 -- --------------------------------------------------------
 
+CREATE TABLE `students` (
+  `id_user` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `students` (`id_user`, `first_name`, `last_name`) VALUES
+(5, 'Ewelina', 'Trefl'),
+(11, 'Kacper', 'Kacperowski'),
+(12, 'Aleksander', 'Aleksandrowski'),
+(13, 'Tobiasz', 'Tobiaszowski');
+
+
+
 --
 -- Struktura tabeli dla tabeli `field_of_study`
 --

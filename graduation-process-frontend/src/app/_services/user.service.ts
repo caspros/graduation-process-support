@@ -32,9 +32,11 @@ export class UserService {
   getCommissionFeatures(): Observable<any> {
     return this.http.get(API_URL + 'commission', { responseType: 'text' });
   }
+
   getUniversityEmployeeFeatures(): Observable<any> {
     return this.http.get(API_URL + 'universityemployee', { responseType: 'text' });
   }
+
   getDeansRepresenativeFeatures(): Observable<any> {
     return this.http.get(API_URL + 'deansrepresenative', { responseType: 'text' });
   }

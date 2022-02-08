@@ -1,0 +1,75 @@
+<div class="col-md-12" *ngIf="authorized; else unauthorizedBlock">
+  <div class="container">
+    <div class="card card-container">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="title_pl">Zgłaszany temat w języku polskim:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title_pl"
+            name="title_pl"
+            [(ngModel)]="form.title_pl"
+            required
+            #title_pl="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && title_pl.invalid"
+          >
+            Pole jest wymagane!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="title_eng">Zgłaszany temat w języku angielskim:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title_eng"
+            name="title_eng"
+            [(ngModel)]="form.title_eng"
+            required
+            #title_eng="ngModel"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && title_eng.invalid"
+          >
+            Pole jest wymagane!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="short_description">Krótki opis tematu:</label>
+          <textarea class="form-control" id="short_description" name="short_description" rows="3" [(ngModel)]="form.short_description"
+                    required
+                    #short_description="ngModel"></textarea>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && short_description.invalid"
+          >
+            Krótki opis jest wymagany!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Zgłoś temat
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #unauthorizedBlock>
+  Error 401 Unauthorized
+</ng-template>
