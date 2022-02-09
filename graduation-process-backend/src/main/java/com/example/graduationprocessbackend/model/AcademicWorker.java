@@ -41,6 +41,13 @@ public class AcademicWorker {
             inverseJoinColumns = @JoinColumn(name = "id_thesis"))
     private Collection<Thesis> thesisEnrolledToPromoters = new ArrayList<>();
 
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable( name = "thesis_has_reviewer",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_thesis"))
+    private Collection<Thesis> thesisEnrolledToReviewers = new ArrayList<>();
+
     public AcademicWorker() {
     }
 

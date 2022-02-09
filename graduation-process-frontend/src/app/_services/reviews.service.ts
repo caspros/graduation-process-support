@@ -48,6 +48,16 @@ export class ReviewsService {
     return this.httpClient.post(`${this.baseURLCreateReviews}`, reviews, this.user.id);
   }
 
+  createThesisHasReviewer(id_thesis: number, id_reviewer: number): Observable<Object>{
+      const body = { title: 'Angular PUT Request Example' };
+      return this.httpClient.put(`${this.baseThesisURL}/${id_thesis}/reviewers/${id_reviewer}`, body);
+    }
+
+   updateThesisHasReviewer(id_old_reviewer: number, id_thesis: number, id_reviewer: number): Observable<Object>{
+   const body = { title: 'Angular PUT Request Example' };
+      return this.httpClient.put(`${this.baseThesisURL}/${id_thesis}/reviewers/${id_reviewer}/oldReviewer/${id_old_reviewer}`, body);
+    }
+
   getReviewsById(id: number): Observable<Reviews>{
     return this.httpClient.get<Reviews>(`${this.baseURL}/${id}`);
   }

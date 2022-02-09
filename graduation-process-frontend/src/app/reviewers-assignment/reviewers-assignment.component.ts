@@ -27,7 +27,7 @@ export class ReviewersAssignmentComponent implements OnInit {
         //this.content = data;
         console.log("Id proba Usera zalogowanego: " + this.user.id)
         this.authorized = true;
-        this.thesisService.getAllThesis().subscribe(
+        this.thesisService.getAllThesisWithStatusRealized().subscribe(
           data => {
             console.log(data);
             this.thesis = data;
@@ -64,4 +64,14 @@ export class ReviewersAssignmentComponent implements OnInit {
       }
     );
   }
+
+  onSubmit(): void {
+      console.log("id prom " + "id thes ")
+   }
+
+  assignReviewer(id_promoter: number, id_thesis: number): void {
+       console.log("id prom " + id_promoter + "id thes " + id_thesis)
+    }
 }
+
+

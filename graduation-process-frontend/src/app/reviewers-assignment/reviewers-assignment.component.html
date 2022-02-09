@@ -4,7 +4,7 @@
   </div>
   <table class="table">
     <thead class="thead-dark">
-    <tr>
+    <tr  class="text-center">
       <th scope="col">#</th>
       <th scope="col">Temat</th>
       <th scope="col">Student</th>
@@ -14,18 +14,30 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
-      <th scope="row">{{ i + 1 }}</th>
-      <td> class="text-center">{{ item.title_pl }}</td>
-      <td> Imie Nazwisko</td>
-      <td>Dr inż. Adam Adamski</td>
-      <div class="form-group">
-        <label for="promoter">Wybierz promotora</label>
-        <select class="form-control" id="promoter" name="promoter" ng-options="promoters" [(ngModel)]="form.promoter">
-          <option *ngFor="let promoter of promoters" [ngValue]="promoter.id_user">{{promoter.id_user}} {{promoter.science_title}} {{promoter.first_name}} {{promoter.last_name}}</option>
-        </select>
-      </div>
-      <td><div class="btn btn-primary">Przydziel</div></td>
+    <tr class="text-center" *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
+      <input type="hidden" id="thesis-{{item.id}}" name="thesis-{{item.id}}" ng-model="item.id" value="{{item.id}}"/>
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item.title_pl }}</td>
+        <td>
+          <span *ngIf="item.students.length > 0; else NoStudent">{{ item.students[0].email }}</span>
+          <ng-template #NoStudent>brak przypisanego studenta</ng-template>
+        </td>
+        <td class="text-center">
+          <span *ngIf="item.promoters.length > 0; else NoPromoter">
+            {{ item.promoters[0].science_title }} {{ item.promoters[0].first_name }} {{ item.promoters[0].last_name }}
+          </span>
+          <ng-template #NoPromoter></ng-template>
+        </td>
+      <td>
+        <span *ngIf="item.reviewers.length > 0; else NoReviewer">{{ item.reviewers[0].science_title }} {{ item.reviewers[0].first_name }} {{ item.reviewers[0].last_name }}</span>
+        <ng-template #NoReviewer>brak przypisanego recenzenta</ng-template>
+      </td>
+        <td>
+          <a href="/thesis/{{item.id}}/reviewer" class="btn btn-primary" routerLink="/thesis/{{item.id}}/reviewer">
+            <span *ngIf="item.reviewers.length > 0; else AssignReviewer">Zmień</span>
+            <ng-template #AssignReviewer>Przydziel</ng-template>
+          </a>
+        </td>
     </tr>
     </tbody>
   </table>

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.example.graduationprocessbackend.model.AcademicWorker;
+import com.example.graduationprocessbackend.model.EStatus;
 import com.example.graduationprocessbackend.model.User;
 import com.example.graduationprocessbackend.repository.AcademicWorkerRepository;
 import com.example.graduationprocessbackend.repository.ThesisRepository;
@@ -52,6 +53,12 @@ public class ThesisController {
         System.out.println("Id zalogowanego promotora: " + user.getId());
         return thesisRepository.findByPromoterId(user.getId());
         //return thesisRepository.findAll();
+    }
+
+    // get all thesis for deans representative
+    @GetMapping("/thesis-realized")
+    public List<Thesis> getAllRealizedThesis(){
+        return thesisRepository.findByStatus(EStatus.zrealizowana);
     }
 
     // get all thesis
@@ -132,6 +139,25 @@ public class ThesisController {
             @PathVariable int promoterId
     ) {
         academicWorkerRepository.addThesisHasPromoter(thesisId, promoterId);
+        return true;
+    }
+
+    @PutMapping("/thesis/{thesisId}/reviewers/{reviewerId}")
+    Boolean enrollReviewerToThesis(
+            @PathVariable int thesisId,
+            @PathVariable int reviewerId
+    ) {
+        academicWorkerRepository.addThesisHasReviewer(thesisId, reviewerId);
+        return true;
+    }
+
+    @PutMapping("/thesis/{thesisId}/reviewers/{reviewerId}/oldReviewer/{oldReviewerId}")
+    Boolean deleteReviewerToThesis(
+            @PathVariable int thesisId,
+            @PathVariable int reviewerId,
+            @PathVariable int oldReviewerId
+    ) {
+        academicWorkerRepository.updateThesisHasReviewer(reviewerId, thesisId, oldReviewerId);
         return true;
     }
 

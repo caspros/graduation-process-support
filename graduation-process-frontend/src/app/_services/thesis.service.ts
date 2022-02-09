@@ -26,16 +26,23 @@ export class ThesisService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
+   //thesis list for logged student
     getThesisForLoggedStudent(): Observable<Thesis[]>{
       return this.httpClient.get<Thesis[]>(`${this.baseURL}`);
     }
 
+  //thesis list for promoters reported by him
     getThesisReportedByPromoter(): Observable<Thesis[]>{
      return this.httpClient.get<Thesis[]>(`${this.baseURL}-promoter`);
    }
 
     getAllThesis(): Observable<Thesis[]>{
       return this.httpClient.get<Thesis[]>(`${this.baseAllURL}`);
+    }
+
+    //thesis list for deans representative
+    getAllThesisWithStatusRealized(): Observable<Thesis[]>{
+      return this.httpClient.get<Thesis[]>(`${this.baseURL}-realized`);
     }
 
     createThesis(thesis: Thesis): Observable<Object>{

@@ -1,0 +1,75 @@
+<div class="col-md-12" *ngIf="authorized; else unauthorizedBlock">
+  <div class="container">
+    <h1 class="center">Dane pracy dyplomowej</h1>
+    <div class="card card-container">
+      <form
+        name="form"
+        (ngSubmit)="onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput1">Wybrany temat</label>
+            <input class="form-control" id="readOnlyInput1" type="text" placeholder="{{thesis.title_pl}}" readonly="">
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput2">Krótki opis tematu</label>
+            <textarea class="form-control" id="readOnlyInput2" type="text" placeholder="{{thesis.short_description}}" readonly="" rows="6"></textarea>
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput3">Autor</label>
+            <input class="form-control" id="readOnlyInput3" type="text" placeholder="{{thesis.students[0].email}}" readonly="">
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput4">Promotor</label>
+            <input class="form-control" id="readOnlyInput4" type="text" placeholder="{{thesis.promoters[0].science_title}} {{thesis.promoters[0].first_name}} {{thesis.promoters[0].last_name}}" readonly="">
+          </fieldset>
+        </div>
+
+
+        <h1 class="center">Wybierz recenzenta</h1>
+        <div class="form-group">
+           <span *ngIf="thesis.reviewers.length > 0; else AssignReviewer">
+             <div class="form-group">
+                    <fieldset>
+                      <label class="form-label" for="readOnlyInput5">Wybrany recenzent</label>
+                      <input class="form-control" id="readOnlyInput5" type="text" placeholder="{{thesis.reviewers[0].science_title}} {{thesis.reviewers[0].first_name}} {{thesis.reviewers[0].last_name}}" readonly="">
+                    </fieldset>
+             </div>
+
+              Zmień recenzenta
+             <select class="form-control" id="reviewer" name="reviewer" ng-options="promoters" [(ngModel)]="form.reviewer">
+              <option *ngFor="let promoter of promoters" [ngValue]="promoter.id_user" [disabled]="thesis.reviewers[0].id_user == promoter.id_user">{{promoter.science_title}} {{promoter.first_name}} {{promoter.last_name}}</option>
+            </select>
+          </span>
+          <ng-template #AssignReviewer>
+            <select class="form-control" id="reviewer" name="reviewer" ng-options="promoters" [(ngModel)]="form.reviewer">
+              <option *ngFor="let promoter of promoters" [ngValue]="promoter.id_user">{{promoter.science_title}} {{promoter.first_name}} {{promoter.last_name}}</option>
+            </select>
+          </ng-template>
+
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Przypisz recenzenta
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #unauthorizedBlock>
+  Error 401 Unauthorized
+</ng-template>
+
