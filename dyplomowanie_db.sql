@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Lut 2022, 00:15
+-- Czas generowania: 09 Lut 2022, 21:25
 -- Wersja serwera: 10.4.14-MariaDB
 -- Wersja PHP: 7.4.11
 
@@ -186,10 +186,10 @@ INSERT INTO `thesis` (`id`, `title_pl`, `title_eng`, `short_description`, `type`
 (32, 'Non omnis sint libe', 'Adipisicing velit en', 'Mollit aut aut disti', 'magisterska', 'zaakceptowana', '2022-02-07'),
 (33, 'Testowy temat w języku polskim', 'Et veniam omnis ut ', 'adsdsad', 'magisterska', 'zaakceptowana', '2022-02-07'),
 (34, 'Testowy temat w języku polskim', 'Test', 'adsadsa', 'magisterska', 'zaakceptowana', '2022-02-07'),
-(35, 'Testowy temat w języku polskim22222', 'Testowy temat w języku angielskim22222', 'Opis w języku angielskim22222', 'magisterska', 'zaakceptowana', '2022-02-07'),
-(36, 'adssad', 'asdsadsa', 'dasdasd', 'magisterska', 'zaakceptowana', '2022-02-07'),
-(37, 'Testowy temat w języku polskim', 'Et veniam omnis ut ', 'dadsa', 'magisterska', 'zaakceptowana', '2022-02-07'),
-(38, 'Ullamco culpa quia ', 'Tenetur accusantium ', 'Facilis ut hic ad qu', 'magisterska', 'zaakceptowana', '2022-02-07'),
+(35, 'Testowy temat w języku polskim22222', 'Testowy temat w języku angielskim22222', 'Opis w języku angielskim22222', 'magisterska', 'zrealizowana', '2022-02-07'),
+(36, 'adssad', 'asdsadsa', 'dasdasd', 'magisterska', 'zrealizowana', '2022-02-07'),
+(37, 'Testowy temat w języku polskim', 'Et veniam omnis ut ', 'dadsa', 'magisterska', 'zrealizowana', '2022-02-07'),
+(38, 'Ullamco culpa quia ', 'Tenetur accusantium ', 'Facilis ut hic ad qu', 'magisterska', 'zrealizowana', '2022-02-07'),
 (39, 'Quia obcaecati est q', 'Expedita suscipit vo', 'Omnis sed aut et est', 'magisterska', 'zaakceptowana', '2022-02-07'),
 (40, 'Dolore sed perferend', 'Commodi corporis vit', 'Voluptatibus nulla a', 'magisterska', 'zaakceptowana', '2022-02-07'),
 (41, 'Temat zgłaszany przez promotora', 'Temat zgłaszany przez promotora EN', 'Temat zgłaszany przez promotora OPIS', 'magisterska', 'zgłoszona', '2022-02-08'),
@@ -234,8 +234,17 @@ INSERT INTO `thesis_has_promoter` (`id_thesis`, `id_user`) VALUES
 
 CREATE TABLE `thesis_has_reviewer` (
   `id_thesis` int(11) NOT NULL,
-  `id_user` int(11) DEFAULT NULL
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `thesis_has_reviewer`
+--
+
+INSERT INTO `thesis_has_reviewer` (`id_thesis`, `id_user`) VALUES
+(38, 4),
+(36, 10),
+(38, 10);
 
 -- --------------------------------------------------------
 
@@ -396,8 +405,8 @@ ALTER TABLE `thesis_has_promoter`
 -- Indeksy dla tabeli `thesis_has_reviewer`
 --
 ALTER TABLE `thesis_has_reviewer`
-  ADD PRIMARY KEY (`id_thesis`),
-  ADD KEY `id_user_fk2_idx` (`id_user`);
+  ADD KEY `id_user_fk2_idx` (`id_user`),
+  ADD KEY `id_thesis_fk2` (`id_thesis`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -512,6 +521,7 @@ ALTER TABLE `thesis_has_promoter`
 -- Ograniczenia dla tabeli `thesis_has_reviewer`
 --
 ALTER TABLE `thesis_has_reviewer`
+  ADD CONSTRAINT `FKkpauadjv6llqa1lp85vkot3wo` FOREIGN KEY (`id_user`) REFERENCES `academic_worker` (`id_user`),
   ADD CONSTRAINT `id_thesis_fk2` FOREIGN KEY (`id_thesis`) REFERENCES `thesis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `id_user_fk2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
