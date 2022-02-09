@@ -21,6 +21,9 @@ public class Thesis {
     @ManyToMany (mappedBy = "thesisEnrolledToPromoters", cascade = CascadeType.ALL)
     private Collection<AcademicWorker> promoters = new ArrayList<>();
 
+    @ManyToMany (mappedBy = "thesisEnrolledToReviewers", cascade = CascadeType.ALL)
+    private Collection<AcademicWorker> reviewers = new ArrayList<>();
+
     @NotBlank
     @Size(max = 255)
     private String title_pl;
@@ -120,5 +123,13 @@ public class Thesis {
 
     public void setPromoters(Collection<AcademicWorker> promoters) {
         this.promoters = promoters;
+    }
+
+    public Collection<AcademicWorker> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(Collection<AcademicWorker> reviewers) {
+        this.reviewers = reviewers;
     }
 }

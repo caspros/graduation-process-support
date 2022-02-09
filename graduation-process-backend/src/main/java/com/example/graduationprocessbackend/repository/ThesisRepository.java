@@ -1,4 +1,5 @@
 package com.example.graduationprocessbackend.repository;
+import com.example.graduationprocessbackend.model.EStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,4 +12,5 @@ public interface ThesisRepository extends JpaRepository<Thesis, Integer> {
     List<Thesis> findByUserId(Integer id);
     @Query(value = "SELECT * FROM thesis_has_promoter thp JOIN thesis t WHERE thp.id_user = ?1 AND thp.id_thesis = t.id" , nativeQuery = true)
     List<Thesis> findByPromoterId(Integer id);
+    List<Thesis> findByStatus(EStatus status);
 }

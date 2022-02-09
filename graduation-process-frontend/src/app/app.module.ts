@@ -20,6 +20,7 @@ import { ReviewListComponent } from './review-list/review-list.component';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { ThesisListPromoterComponent } from './thesis-list-promoter/thesis-list-promoter.component';
 import { AddThesisPromoterComponent } from './add-thesis-promoter/add-thesis-promoter.component';
+import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AddThesisPromoterComponent } from './add-thesis-promoter/add-thesis-pro
     AddReviewComponent,
     ThesisListPromoterComponent,
     AddThesisPromoterComponent,
+    AssignReviewerComponent,
   ],
   imports: [
     BrowserModule,
