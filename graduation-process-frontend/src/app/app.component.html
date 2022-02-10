@@ -1,6 +1,6 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Dyplomowanie</a>
+    <a href="#" class="navbar-brand" translate="">app.title</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="showStudentFeatures">
       <li class="nav-item">
         <a href="/thesis" class="nav-link" routerLink="thesis">Lista zgłoszonych tematów</a>
@@ -15,7 +15,7 @@
 
      <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_DEANS_REPRESENTATIVE')">
       <li class="nav-item">
-        <a href="/reviewers-assignment" class="nav-link" routerLink="reviewers-assignment">Przydziel recenzentów</a>
+        <a href="/reviewers-assignment" class="nav-link" routerLink="reviewers-assignment" translate="">app.nav</a>
       </li>
      </ul>
 
@@ -37,6 +37,15 @@
       </li>
     </ul>
 
+    <ul class="navbar-nav ml-auto" routerLinkActive="active">
+      <li class="nav-item mr-5">
+        <button class="btn btn-success" (click)="changeLang('en')">English</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-success" (click)="changeLang('pl')">Polski</button>
+      </li>
+    </ul>
+
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
@@ -49,12 +58,16 @@
 
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+
+
       <li class="nav-item">
         <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
       </li>
 
       <li class="nav-item">
-        <a href class="nav-lin" (click)="logout()">Wyloguj</a>
+
+
+        <a href class="btn btn-danger" (click)="logout()" translate="">app.logout</a>
       </li>
     </ul>
   </nav>

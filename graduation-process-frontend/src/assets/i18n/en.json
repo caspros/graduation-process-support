@@ -1,0 +1,19 @@
+{
+  "reviewers-assignment": {
+    "title": "Reviewers Assignment",
+    "table-title": "Title",
+    "table-student": "Student",
+    "table-promoter": "Promoter",
+    "table-reviewer": "Reviewer",
+    "table-action": "Action",
+    "table-grade": "Grade",
+    "table-button-change": "Change",
+    "table-button-assign": "Assign",
+    "title2": "Thesis to review one more time"
+  },
+  "app": {
+    "title": "Graduation Process",
+    "nav": "Assign reviewers",
+    "logout": "Logout"
+  }
+}

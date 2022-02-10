@@ -4,8 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
@@ -22,6 +24,11 @@ import { AddThesisPromoterComponent } from './add-thesis-promoter/add-thesis-pro
 import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.component';
 import { ReviewListStudentComponent } from './review-list-student/review-list-student.component';
 import { ReviewStudentComponent } from './review-student/review-student.component';
+import { RouterModule } from '@angular/router';
+
+export function rootLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json')
+}
 
 @NgModule({
   declarations: [
@@ -48,6 +55,14 @@ import { ReviewStudentComponent } from './review-student/review-student.componen
     NgbModule,
     HttpClientModule,
     FormsModule,
+    RouterModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: rootLoaderFactory,
+        deps: [HttpClient],
+       }
+    })
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

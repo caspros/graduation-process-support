@@ -1,16 +1,16 @@
 <div class="container mt-5">
   <div class="header d-flex justify-content-center">
-    <h1 class="center">Przydział recenzentów</h1>
+    <h1 class="center" translate="">reviewers-assignment.title</h1>
   </div>
   <table class="table">
     <thead class="thead-dark">
     <tr  class="text-center">
       <th scope="col">#</th>
-      <th scope="col">Temat</th>
-      <th scope="col">Student</th>
-      <th scope="col">Opiekun</th>
-      <th scope="col">Recenzent</th>
-      <th scope="col">Akcja</th>
+      <th scope="col" translate="">reviewers-assignment.table-title</th>
+      <th scope="col" translate="">reviewers-assignment.table-student</th>
+      <th scope="col" translate="">reviewers-assignment.table-promoter</th>
+      <th scope="col" translate="">reviewers-assignment.table-reviewer</th>
+      <th scope="col" translate="">reviewers-assignment.table-action</th>
     </tr>
     </thead>
     <tbody>
@@ -34,26 +34,27 @@
       </td>
         <td>
           <a href="/thesis/{{item.id}}/reviewer" class="btn btn-primary" routerLink="/thesis/{{item.id}}/reviewer">
-            <span *ngIf="item.reviewers.length > 0; else AssignReviewer">Zmień</span>
-            <ng-template #AssignReviewer>Przydziel</ng-template>
+            <span *ngIf="item.reviewers.length > 0; else AssignReviewer" translate="">reviewers-assignment.table-button-change</span>
+            <ng-template #AssignReviewer><span translate="">reviewers-assignment.table-button-assign</span></ng-template>
           </a>
         </td>
     </tr>
     </tbody>
   </table>
 
-
-  <h1 class="center">Prace do ponownego zrecenzowania</h1>
+  <div class="header d-flex justify-content-center">
+    <h1 class="center" translate="">reviewers-assignment.title2</h1>
+  </div>
   <table class="table">
     <thead class="thead-dark">
     <tr class="text-center">
       <th scope="col">#</th>
-      <th scope="col">Temat</th>
-      <th scope="col">Student</th>
-      <th scope="col">Opiekun</th>
-      <th scope="col">Ocena</th>
-      <th scope="col">Recenzent</th>
-      <th scope="col">Akcja</th>
+      <th scope="col" translate="">reviewers-assignment.table-title</th>
+      <th scope="col" translate="">reviewers-assignment.table-student</th>
+      <th scope="col" translate="">reviewers-assignment.table-promoter</th>
+      <th scope="col" translate="">reviewers-assignment.table-grade</th>
+      <th scope="col" translate="">reviewers-assignment.table-reviewer</th>
+      <th scope="col" translate="">reviewers-assignment.table-action</th>
     </tr>
     </thead>
     <tbody>
@@ -80,8 +81,8 @@
       </td>
       <td>
         <a href="/thesis/{{item.id}}/reviewer" class="btn btn-primary" routerLink="/thesis/{{item.id}}/reviewer">
-          <span *ngIf="item.reviewers.length > 0; else AssignReviewer">Zmień</span>
-          <ng-template #AssignReviewer>Przydziel</ng-template>
+          <span *ngIf="item.reviewers.length > 0; else AssignReviewer" translate="">reviewers-assignment.table-button-change</span>
+          <ng-template #AssignReviewer><span translate="">reviewers-assignment.table-button-assign</span></ng-template>
         </a>
       </td>
     </tr>

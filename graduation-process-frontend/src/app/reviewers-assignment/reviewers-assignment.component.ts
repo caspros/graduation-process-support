@@ -4,6 +4,8 @@ import { UserService } from '../_services/user.service';
 import { ThesisService } from '../_services/thesis.service';
 import { Error401Component } from '../common/error401/error401.component';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { TranslateConfigService } from '../_services/translate-config.service';
+
 
 @Component({
   selector: 'app-reviewers-assignment',
@@ -20,7 +22,7 @@ export class ReviewersAssignmentComponent implements OnInit {
   thesis: any = {}
   thesisNegative: any = {}
 
-  constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
+  constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService, private translateConfigService: TranslateConfigService) { }
 
   ngOnInit(): void {
     this.userService.getDeansRepresenativeFeatures().subscribe(
@@ -88,6 +90,10 @@ export class ReviewersAssignmentComponent implements OnInit {
   assignReviewer(id_promoter: number, id_thesis: number): void {
        console.log("id prom " + id_promoter + "id thes " + id_thesis)
     }
+
+  changeLanguage(type: string) {
+    this.translateConfigService.changeLanguage(type);
+  }
 }
 
 

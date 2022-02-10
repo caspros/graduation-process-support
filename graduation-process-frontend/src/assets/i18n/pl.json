@@ -1,0 +1,19 @@
+{
+  "reviewers-assignment": {
+        "title": "Przydział recenzentów",
+        "table-title": "Temat",
+        "table-student": "Student",
+        "table-promoter": "Opiekun",
+        "table-reviewer": "Recenzent",
+        "table-action": "Akcja",
+        "table-grade": "Ocena",
+        "table-button-change": "Zmień",
+        "table-button-assign": "Przydziel",
+        "title2": "Prace do ponownego zrecenzowania"
+  },
+  "app": {
+    "title": "Dyplomowanie",
+    "nav": "Przydziel recenzentów",
+    "logout": "Wyloguj"
+  }
+}
