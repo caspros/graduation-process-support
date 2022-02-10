@@ -29,9 +29,15 @@ export class ReviewsService {
     return this.httpClient.get<Reviews[]>(`${this.baseURL}`);
   }
 
-  getThesisReportedByPromoter(): Observable<Thesis[]>{
-   return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-promoter`);
+  getRealizedThesisReportedByPromoter(): Observable<Thesis[]>{
+   return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-promoter/realized`);
  }
+
+
+
+  getThesisForReviewer(): Observable<Thesis[]>{
+    return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-reviewer`);
+  }
 
   createReviews(reviews: Reviews): Observable<Object>{
 
@@ -40,8 +46,6 @@ export class ReviewsService {
       //thesis.id_student = this.user.id;
     }
     reviews.creation_date = new Date()
-   // reviews.type = "magisterska"
-   // reviews.status = "zgłoszona"
 
     console.log(reviews)
     console.log(this.user.id)

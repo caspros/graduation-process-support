@@ -24,6 +24,9 @@ public class Thesis {
     @ManyToMany (mappedBy = "thesisEnrolledToReviewers", cascade = CascadeType.ALL)
     private Collection<AcademicWorker> reviewers = new ArrayList<>();
 
+    @OneToMany(targetEntity=Review.class, mappedBy="thesis",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> review = new ArrayList<>();
+
     @NotBlank
     @Size(max = 255)
     private String title_pl;

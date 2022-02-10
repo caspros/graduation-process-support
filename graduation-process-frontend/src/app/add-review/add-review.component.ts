@@ -18,12 +18,23 @@ export class AddReviewComponent implements OnInit {
   isSuccessful = false;
   errorMessage = '';
   status = 'nie zrecenzowana';
+  private addedReview: any = {};
+  thesis: any = {};
+  private thesisId: number;
+  private currentURL: string;
+  private urlArr: any = {};
 
-  constructor( private userService: UserService, private reviewsService: ReviewsService) { }
+
+  constructor( private userService: UserService, private reviewsService: ReviewsService, private thesisService: ThesisService) { }
 
   ngOnInit(): void {
+    this.currentURL = window.location.href;
+    this.urlArr = this.currentURL.split("/")
+    this.thesisId = this.urlArr[this.urlArr.length-2];
     this.userService.getUniversityEmployeeFeatures().subscribe(
       data => {
+
+        console.log("Id thes: " + this.thesisId )
         this.content = data;
         this.authorized = true;
       },
@@ -31,12 +42,27 @@ export class AddReviewComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+    this.thesisService.getThesisById(this.thesisId).subscribe(
+      data => {
+        console.log(data);
+        this.thesis = data;
+
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
   }
+
+
+
 
   onSubmit(): void {
     this.reviewsService.createReviews(this.form).subscribe(
       data => {
-        console.log(data);
+        this.addedReview = data;
+        console.log("Id Thesis dodanej: " + this.addedReview.id);
         this.isSuccessful = true;
         this.isAddingFailed = false;
       },

@@ -2,10 +2,7 @@ package com.example.graduationprocessbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -43,6 +40,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "thesis_id"))
     private Collection<Thesis> thesisEnrolled = new ArrayList<>();
+
+    @OneToMany(targetEntity=Review.class, mappedBy="user",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> review = new ArrayList<>();
 
     public User() {
     }

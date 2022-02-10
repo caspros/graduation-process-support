@@ -55,6 +55,20 @@ public class ThesisController {
         //return thesisRepository.findAll();
     }
 
+    //  get all thesis for reviewer
+    @GetMapping("/thesis-reviewer")
+    public List<Thesis> getReviewerThesis(@AuthenticationPrincipal UserDetailsImpl user){
+        return thesisRepository.findByReviewerId(user.getId());
+    }
+
+    // get all realized thesis for promoter
+    @GetMapping("/thesis-promoter/realized")
+    public List<Thesis> getPromoterRealizedThesis(@AuthenticationPrincipal UserDetailsImpl user){
+        return thesisRepository.findByFinishedForPromoterId(user.getId());
+        //return thesisRepository.findAll();
+    }
+
+
     // get all thesis for deans representative
     @GetMapping("/thesis-realized")
     public List<Thesis> getAllRealizedThesis(){

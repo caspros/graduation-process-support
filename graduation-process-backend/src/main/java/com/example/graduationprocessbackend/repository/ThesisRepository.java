@@ -13,4 +13,10 @@ public interface ThesisRepository extends JpaRepository<Thesis, Integer> {
     @Query(value = "SELECT * FROM thesis_has_promoter thp JOIN thesis t WHERE thp.id_user = ?1 AND thp.id_thesis = t.id" , nativeQuery = true)
     List<Thesis> findByPromoterId(Integer id);
     List<Thesis> findByStatus(EStatus status);
+    @Query(value = "SELECT * FROM thesis_has_reviewer thp JOIN thesis t WHERE thp.id_user = ?1 AND thp.id_thesis = t.id" , nativeQuery = true)
+    List<Thesis> findByReviewerId(Integer id);
+    @Query(value = "SELECT * FROM thesis_has_promoter thp JOIN thesis t WHERE thp.id_user = ?1 AND thp.id_thesis = t.id AND t.status='zrealizowana'" , nativeQuery = true)
+    List<Thesis> findByFinishedForPromoterId(Integer id);
+
+
 }

@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="header d-flex justify-content-center">
-    <h1 class="center">Prace dyplomowe - recenzje</h1>
+    <h1 class="center">Prace do zrecenzowania jako promotor</h1>
   </div>
   <table class="table">
     <thead class="thead-dark">
@@ -23,8 +23,37 @@
       </td>
       <td>{{ item.status }}</td> <!--status któego nie ma -->
       <td>{{ item.creation_date.substring(0,10) }}</td>
-      <td> <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
+      <td> <a href="/add/{{item.id}}/{{item.promoters[0].id_user}}" routerLink="add/{{item.id}}/{{item.promoters[0].id_user}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
+    </tr>
+    </tbody>
+  </table>
+  <div class="header d-flex justify-content-center">
+  <h1 class="center">Prace do zrecenzowania jako recenzent</h1>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Temat</th>
+      <th scope="col">Student</th>
+      <th scope="col">Status</th> <!-- Nie ma pola w bazie, powinno być z enumelatorem {zrecenzowano, do zrecenzjonowania} -->
+      <th scope="col">Data</th>
+      <th scope="col">Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of thesis1; let i = index" [attr.data-index]="i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item.title_pl }}</td>
+      <td>
+        <span *ngIf="item.students.length > 0; else NoStudent">{{ item.students[0].email }}</span>
+        <ng-template #NoStudent>brak przypisanego studenta</ng-template>
+      </td>
+      <td>{{ item.status }}</td> <!--status któego nie ma -->
+      <td>{{ item.creation_date.substring(0,10) }}</td>
+      <td> <a href="/add/{{item.id}}/{{item.reviewers[0].id_user}}" routerLink="add/{{item.id}}/{{item.reviewers[0].id_user}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
     </tr>
     </tbody>
   </table>
 </div>
+
