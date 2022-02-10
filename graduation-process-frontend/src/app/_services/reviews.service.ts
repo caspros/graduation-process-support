@@ -33,8 +33,6 @@ export class ReviewsService {
    return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-promoter/realized`);
  }
 
-
-
   getThesisForReviewer(): Observable<Thesis[]>{
     return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-reviewer`);
   }
@@ -67,6 +65,10 @@ export class ReviewsService {
     return this.httpClient.get<Reviews>(`${this.baseURL}/${id}`);
   }
 
+  getReviewsByStudentId(id: number): Observable<Reviews>{
+     return this.httpClient.get<Reviews>(`${this.baseURL}-student`);
+   }
+
   getAllReviews(): Observable<Reviews>{
     return this.httpClient.get<Reviews>(`${this.baseURL}`);
   }
@@ -78,17 +80,6 @@ export class ReviewsService {
   deleteReviews(id: number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id}`);
   }
-
-  /*constructor(private http: HttpClient) { }
-
-  add(data: any): Observable<any> {
-    return this.http.post(AUTH_API + 'add', {
-      title_pl: data.title_pl,
-      title_eng: data.title_eng,
-      short_description: data.short_description,
-      promoter: data.promoter,
-    }, httpOptions);
-  }*/
 
 }
 

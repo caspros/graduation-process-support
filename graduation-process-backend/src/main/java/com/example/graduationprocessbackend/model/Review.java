@@ -1,44 +1,48 @@
 package com.example.graduationprocessbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @Table(	name = "reviews" )
 public class Review {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_review;
 
-    @ManyToOne()
-    @JoinColumn(name="id_thesis", referencedColumnName = "id", insertable = false, updatable = false)
-    private Thesis thesis;
+    @NotNull
+    private int id_thesis;
 
-    @ManyToOne()
-    @JoinColumn(name="id_user", referencedColumnName = "id", insertable = false, updatable = false)
-    private User user;
+    @NotNull
+    private int id_user;
 
     @NotBlank
-    private double grade;
+    private String grade;
 
     @NotBlank
     private String review_description;
 
-    @NotBlank
     @CreatedDate
     private Date creation_date;
 
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name="id_thesis", referencedColumnName = "id", insertable = false, updatable = false)
+    private Thesis thesis;
+
+    @JsonIgnore
+    @ManyToOne()
+    @JoinColumn(name="id_user", referencedColumnName = "id", insertable = false, updatable = false)
+    private User user;
+
     public Review() {
     }
-
 
     public void setId(int id_review) {
         this.id_review = id_review;
@@ -46,10 +50,6 @@ public class Review {
 
     public int getId() {
         return id_review;
-    }
-
-    public void setGrade(double grade) {
-        this.grade = grade;
     }
 
     public void setReview_description(String review_description) {
@@ -60,7 +60,7 @@ public class Review {
         this.creation_date = creation_date;
     }
 
-    public double getGrade() {
+    public String getGrade() {
         return grade;
     }
 
@@ -86,5 +86,33 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getId_review() {
+        return id_review;
+    }
+
+    public void setId_review(int id_review) {
+        this.id_review = id_review;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public int getId_thesis() {
+        return id_thesis;
+    }
+
+    public void setId_thesis(int id_thesis) {
+        this.id_thesis = id_thesis;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 }

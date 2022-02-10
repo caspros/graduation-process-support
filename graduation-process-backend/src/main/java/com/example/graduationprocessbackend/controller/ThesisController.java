@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.example.graduationprocessbackend.model.AcademicWorker;
-import com.example.graduationprocessbackend.model.EStatus;
-import com.example.graduationprocessbackend.model.User;
+import com.example.graduationprocessbackend.model.*;
 import com.example.graduationprocessbackend.repository.AcademicWorkerRepository;
 import com.example.graduationprocessbackend.repository.ThesisRepository;
 import com.example.graduationprocessbackend.repository.StudentHasThesisRepository;
@@ -19,7 +17,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.graduationprocessbackend.exception.ResourceNotFoundException;
-import com.example.graduationprocessbackend.model.Thesis;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -61,6 +58,12 @@ public class ThesisController {
         return thesisRepository.findByReviewerId(user.getId());
     }
 
+
+    @GetMapping("/reviews-student")
+    public List<Thesis> getReviewsForStudent(@AuthenticationPrincipal UserDetailsImpl user){
+        return thesisRepository.findReviewsByStudentId(user.getId());
+    }
+
     // get all realized thesis for promoter
     @GetMapping("/thesis-promoter/realized")
     public List<Thesis> getPromoterRealizedThesis(@AuthenticationPrincipal UserDetailsImpl user){
@@ -73,6 +76,12 @@ public class ThesisController {
     @GetMapping("/thesis-realized")
     public List<Thesis> getAllRealizedThesis(){
         return thesisRepository.findByStatus(EStatus.zrealizowana);
+    }
+
+    // get all thesis for deans representative with negative grade
+    @GetMapping("/thesis-negative")
+    public List<Thesis> getAllNegativeThesis(){
+        return thesisRepository.findByNegativeGrade();
     }
 
     // get all thesis

@@ -5,11 +5,11 @@ import { ThesisService } from '../_services/thesis.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
-  selector: 'app-review-list',
-  templateUrl: './review-list.component.html',
-  styleUrls: ['./review-list.component.css']
+  selector: 'app-review-list-student',
+  templateUrl: './review-list-student.component.html',
+  styleUrls: ['./review-list-student.component.css']
 })
-export class ReviewListComponent implements OnInit {
+export class ReviewListStudentComponent implements OnInit {
 
   constructor(private reviewsService: ReviewsService, private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
 
@@ -24,7 +24,7 @@ export class ReviewListComponent implements OnInit {
         this.user = this.tokenStorage.getUser();
      }
 
-     this.userService.getUniversityEmployeeFeatures().subscribe(
+     this.userService.getStudentFeatures().subscribe(
        data => {
 
          this.authorized = true;
@@ -35,7 +35,7 @@ export class ReviewListComponent implements OnInit {
      );
 
 
-    this.reviewsService.getRealizedThesisReportedByPromoter().subscribe(
+    this.reviewsService.getReviewsByStudentId(this.user.id).subscribe(
       data => {
         console.log(data);
         this.thesis = data;

@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
-
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +20,8 @@ import { AddReviewComponent } from './add-review/add-review.component';
 import { ThesisListPromoterComponent } from './thesis-list-promoter/thesis-list-promoter.component';
 import { AddThesisPromoterComponent } from './add-thesis-promoter/add-thesis-promoter.component';
 import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.component';
+import { ReviewListStudentComponent } from './review-list-student/review-list-student.component';
+import { ReviewStudentComponent } from './review-student/review-student.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.compo
     ThesisListPromoterComponent,
     AddThesisPromoterComponent,
     AssignReviewerComponent,
+    ReviewListStudentComponent,
+    ReviewStudentComponent
   ],
   imports: [
     BrowserModule,

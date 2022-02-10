@@ -18,6 +18,7 @@ export class ReviewersAssignmentComponent implements OnInit {
   promoters: any = {};
   private user: any;
   thesis: any = {}
+  thesisNegative: any = {}
 
   constructor(private userService: UserService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
 
@@ -45,6 +46,21 @@ export class ReviewersAssignmentComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+
+
+    this.thesisService.getAllThesisWithNegativeGrade().subscribe(
+        data => {
+          console.log(data);
+          this.thesisNegative = data;
+
+          this.thesis.forEach((item: any) => {
+            item.isSelected = false;
+          });
+        },
+        err => {
+          console.log(err);
+        }
+      );
 
     if (this.tokenStorage.getToken()) {
       this.user = this.tokenStorage.getUser();

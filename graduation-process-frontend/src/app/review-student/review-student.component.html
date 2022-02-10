@@ -1,0 +1,39 @@
+<div class="col-md-12" *ngIf="authorized; else unauthorizedBlock">
+  <div class="container">
+
+    <div class="card card-container">
+      <h1 class="center">Dane pracy dyplomowej</h1>
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput1">Wybrana praca</label>
+            <input class="form-control" id="readOnlyInput1" type="text" placeholder="{{thesis.title_pl}}" readonly="">
+          </fieldset>
+        </div>
+
+        <div class="form-group">
+          <fieldset>
+            <label class="form-label" for="readOnlyInput2">Autor</label>
+            <input class="form-control" id="readOnlyInput2" type="text" placeholder="{{thesis.students[0].email}}" readonly="">
+          </fieldset>
+        </div>
+
+        <div>
+
+
+          <h1 class="center">Recenzja</h1>
+          <br>
+          <h4>Ocena: </h4>
+          <input type="number" disabled value="{{this.thesis.review[0].grade}}">
+
+          <h4>Ocena opisowa:</h4>
+          <textarea class="form-control" name="short_description" rows="3" disabled>{{this.thesis.review[0].review_description}}
+        </textarea>
+        </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #unauthorizedBlock>
+  Error 401 Unauthorized
+</ng-template>
+

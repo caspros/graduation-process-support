@@ -20,14 +20,21 @@ export class AddReviewComponent implements OnInit {
   status = 'nie zrecenzowana';
   private addedReview: any = {};
   thesis: any = {};
+  private user: any;
   private thesisId: number;
   private currentURL: string;
   private urlArr: any = {};
+  public alreadyReviewed: boolean = false;
 
 
   constructor( private userService: UserService, private reviewsService: ReviewsService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+  if (this.tokenStorage.getToken()) {
+          this.user = this.tokenStorage.getUser();
+          console.log("Id Usera zalogowanego: " + this.user.id)
+       }
+
     this.currentURL = window.location.href;
     this.urlArr = this.currentURL.split("/")
     this.thesisId = this.urlArr[this.urlArr.length-1];
@@ -45,7 +52,9 @@ export class AddReviewComponent implements OnInit {
       data => {
         console.log(data);
         this.thesis = data;
-
+        if(this.thesis.review.length > 0 && this.thesis.review[0].id_user == this.user.id) {
+          this.alreadyReviewed = true;
+        }
       },
       err => {
         console.log(err);

@@ -45,6 +45,11 @@ export class ThesisService {
       return this.httpClient.get<Thesis[]>(`${this.baseURL}-realized`);
     }
 
+    //thesis list for deans representative with negative grade
+    getAllThesisWithNegativeGrade(): Observable<Thesis[]>{
+      return this.httpClient.get<Thesis[]>(`${this.baseURL}-negative`);
+    }
+
     createThesis(thesis: Thesis): Observable<Object>{
 
       if (this.tokenStorage.getToken()) {

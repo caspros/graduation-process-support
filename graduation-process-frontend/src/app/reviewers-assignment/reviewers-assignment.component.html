@@ -41,4 +41,50 @@
     </tr>
     </tbody>
   </table>
+
+
+  <h1 class="center">Prace do ponownego zrecenzowania</h1>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr class="text-center">
+      <th scope="col">#</th>
+      <th scope="col">Temat</th>
+      <th scope="col">Student</th>
+      <th scope="col">Opiekun</th>
+      <th scope="col">Ocena</th>
+      <th scope="col">Recenzent</th>
+      <th scope="col">Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let item of thesisNegative; let i = index" [attr.data-index]="i">
+      <input type="hidden" id="thesis-{{item.id}}" name="thesis-{{item.id}}" ng-model="item.id" value="{{item.id}}"/>
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item.title_pl }}</td>
+      <td>
+        <span *ngIf="item.students.length > 0; else NoStudent">{{ item.students[0].email }}</span>
+        <ng-template #NoStudent>brak przypisanego studenta</ng-template>
+      </td>
+      <td class="text-center">
+          <span *ngIf="item.promoters.length > 0; else NoPromoter">
+            {{ item.promoters[0].science_title }} {{ item.promoters[0].first_name }} {{ item.promoters[0].last_name }}
+          </span>
+        <ng-template #NoPromoter></ng-template>
+      </td>
+      <td>
+        {{ item.review[0].grade }}
+      </td>
+      <td>
+        <span *ngIf="item.reviewers.length > 0; else NoReviewer">{{ item.reviewers[0].science_title }} {{ item.reviewers[0].first_name }} {{ item.reviewers[0].last_name }}</span>
+        <ng-template #NoReviewer></ng-template>
+      </td>
+      <td>
+        <a href="/thesis/{{item.id}}/reviewer" class="btn btn-primary" routerLink="/thesis/{{item.id}}/reviewer">
+          <span *ngIf="item.reviewers.length > 0; else AssignReviewer">Zmień</span>
+          <ng-template #AssignReviewer>Przydziel</ng-template>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

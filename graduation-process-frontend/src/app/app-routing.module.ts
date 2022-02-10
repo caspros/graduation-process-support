@@ -12,6 +12,8 @@ import { ThesisConfirmationComponent } from './thesis-confirmation/thesis-confir
 import { AddReviewComponent } from "./add-review/add-review.component";
 import { ReviewListComponent } from "./review-list/review-list.component";
 import { AssignReviewerComponent } from './assign-reviewer/assign-reviewer.component';
+import { ReviewListStudentComponent } from './review-list-student/review-list-student.component';
+import { ReviewStudentComponent } from './review-student/review-student.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'thesis/confirmation', component: ThesisConfirmationComponent },
   { path: 'reviewers-assignment', component: ReviewersAssignmentComponent },
   { path: 'review', component: ReviewListComponent },
+  { path: 'review-student', component: ReviewListStudentComponent },
+  { path: 'review-student/:id', component: ReviewStudentComponent },
   { path: 'review/add/:id', component: AddReviewComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

@@ -1,7 +1,8 @@
 <div class="col-md-12" *ngIf="authorized; else unauthorizedBlock">
 <div class="container">
-    <h1 class="center">Dane pracy dyplomowej</h1>
+
     <div class="card card-container">
+      <h1 class="center">Dane pracy dyplomowej</h1>
       <form
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
@@ -22,41 +23,54 @@
           </fieldset>
         </div>
 
+      <div *ngIf="this.alreadyReviewed; else AddReview">
+
 
         <h1 class="center">Recenzja</h1>
-        <div class="form-group">
-          <select class="form-control" id="grade" name="grade" [(ngModel)]="form.grade">
-            <option>Wybierz ocene</option>
-            <option>2.0</option>
-            <option>3.0</option>
-            <option>3.5</option>
-            <option>4.0</option>
-            <option>4.5</option>
-            <option>5.0</option>
-            <option>5.5</option>
-          </select>
-        </div>
+        <br>
+        <h4>Ocena: </h4>
+        <input type="number" disabled value="{{this.thesis.review[0].grade}}">
 
-
-        <div class="form-group">
-          <label for="short_description">Ocena opisowa:</label>
-          <textarea class="form-control" id="short_description" name="short_description" rows="3" [(ngModel)]="form.review_description"
-                    required
-                    #review_description="ngModel"></textarea>
-          <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="f.submitted && review_description.invalid"
-          >
-            Ocena opisowa jest wymagana!
+        <h4>Ocena opisowa:</h4>
+        <textarea class="form-control" name="short_description" rows="3" disabled>{{this.thesis.review[0].review_description}}
+        </textarea>
+      </div>
+        <ng-template #AddReview>
+          <h1 class="center">Recenzja</h1>
+          <div class="form-group">
+            <select class="form-control" id="grade" name="grade" [(ngModel)]="form.grade">
+              <option>Wybierz ocene</option>
+              <option>2.0</option>
+              <option>3.0</option>
+              <option>3.5</option>
+              <option>4.0</option>
+              <option>4.5</option>
+              <option>5.0</option>
+              <option>5.5</option>
+            </select>
           </div>
-        </div>
 
-        <div class="form-group">
-          <button class="btn btn-primary btn-block">
-            Wystaw recenzje
-          </button>
-        </div>
+
+          <div class="form-group">
+            <label for="short_description">Ocena opisowa:</label>
+            <textarea class="form-control" id="short_description" name="short_description" rows="3" [(ngModel)]="form.review_description"
+                      required
+                      #review_description="ngModel"></textarea>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && review_description.invalid"
+            >
+              Ocena opisowa jest wymagana!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">
+              Wystaw recenzje
+            </button>
+          </div>
+        </ng-template>
       </form>
     </div>
   </div>

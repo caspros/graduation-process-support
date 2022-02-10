@@ -1,0 +1,28 @@
+<div class="container mt-5" *ngIf="authorized; else unauthorizedBlock">
+  <div class="header d-flex justify-content-center">
+    <h1 class="center">Lista recenzji</h1>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Temat</th>
+      <th scope="col">Data</th>
+      <th scope="col">Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of thesis; let i = index" [attr.data-index]="i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ item.title_pl }}</td>
+      <td>{{ item.creation_date.substring(0,10) }}</td>
+      <td>
+          <a href="/review-student/{{item.id}}" routerLink="/review-student/{{item.id}}"><div class="btn btn-primary">Podgląd recenzji</div></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #unauthorizedBlock>
+  Error 401 Unauthorized
+</ng-template>

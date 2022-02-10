@@ -8,6 +8,9 @@
       <li class="nav-item">
         <a href="/thesis/add" class="nav-link" routerLink="thesis/add" >Zgłoś nowy temat</a>
       </li>
+      <li class="nav-item">
+        <a href="/review-student" class="nav-link" routerLink="review-student">Lista recenzji</a>
+      </li>
     </ul>
 
      <ul class="navbar-nav mr-auto" routerLinkActive="active" *ngIf="roles && roles.includes('ROLE_DEANS_REPRESENTATIVE')">
@@ -24,10 +27,7 @@
         <a href="/thesis/add-promoter" class="nav-link" routerLink="/thesis/add-promoter">Zgłoś nowy temat</a>
       </li>
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="review">Lista recenzji</a>
-      </li>
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="review/add">Wystaw recenzję</a>
+        <a href="/review" class="nav-link" routerLink="review">Lista recenzji</a>
       </li>
     </ul>
 

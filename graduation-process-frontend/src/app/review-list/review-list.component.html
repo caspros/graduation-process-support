@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="authorized; else unauthorizedBlock">
   <div class="header d-flex justify-content-center">
     <h1 class="center">Prace do zrecenzowania jako promotor</h1>
   </div>
@@ -8,7 +8,7 @@
       <th scope="col">#</th>
       <th scope="col">Temat</th>
       <th scope="col">Student</th>
-      <th scope="col">Status</th> <!-- Nie ma pola w bazie, powinno być z enumelatorem {zrecenzowano, do zrecenzjonowania} -->
+      <th scope="col">Status</th>
       <th scope="col">Data</th>
       <th scope="col">Akcja</th>
     </tr>
@@ -23,7 +23,15 @@
       </td>
       <td>{{ item.status }}</td> <!--status któego nie ma -->
       <td>{{ item.creation_date.substring(0,10) }}</td>
-      <td> <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
+      <td>
+        <span *ngIf="item.review.length > 0; else AddReview">
+          <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Podgląd recenzji</div></a>
+        </span>
+        <ng-template #AddReview>
+          <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a>
+        </ng-template>
+
+      </td>
     </tr>
     </tbody>
   </table>
@@ -36,7 +44,7 @@
       <th scope="col">#</th>
       <th scope="col">Temat</th>
       <th scope="col">Student</th>
-      <th scope="col">Status</th> <!-- Nie ma pola w bazie, powinno być z enumelatorem {zrecenzowano, do zrecenzjonowania} -->
+      <th scope="col">Status</th>
       <th scope="col">Data</th>
       <th scope="col">Akcja</th>
     </tr>
@@ -49,11 +57,21 @@
         <span *ngIf="item.students.length > 0; else NoStudent">{{ item.students[0].email }}</span>
         <ng-template #NoStudent>brak przypisanego studenta</ng-template>
       </td>
-      <td>{{ item.status }}</td> <!--status któego nie ma -->
+      <td>{{ item.status }}</td>
       <td>{{ item.creation_date.substring(0,10) }}</td>
-      <td> <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a></td> <!--// if status=zrecenzowana "Podgląd -->
+      <td>
+        <span *ngIf="item.review.length > 0; else AddReview">
+          <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Podgląd recenzji</div></a>
+        </span>
+        <ng-template #AddReview>
+          <a href="/add/{{item.id}}" routerLink="add/{{item.id}}"><div class="btn btn-primary">Zrecenzuj</div></a>
+        </ng-template>
+
+      </td>
     </tr>
     </tbody>
   </table>
 </div>
-
+<ng-template #unauthorizedBlock>
+  Error 401 Unauthorized
+</ng-template>
