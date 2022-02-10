@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'thesis/confirmation', component: ThesisConfirmationComponent },
   { path: 'reviewers-assignment', component: ReviewersAssignmentComponent },
   { path: 'review', component: ReviewListComponent },
-  { path: 'review/add/:id/:id', component: AddReviewComponent },
+  { path: 'review/add/:id', component: AddReviewComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

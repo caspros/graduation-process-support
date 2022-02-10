@@ -30,7 +30,7 @@ export class AddReviewComponent implements OnInit {
   ngOnInit(): void {
     this.currentURL = window.location.href;
     this.urlArr = this.currentURL.split("/")
-    this.thesisId = this.urlArr[this.urlArr.length-2];
+    this.thesisId = this.urlArr[this.urlArr.length-1];
     this.userService.getUniversityEmployeeFeatures().subscribe(
       data => {
         console.log("Id thes: " + this.thesisId )
