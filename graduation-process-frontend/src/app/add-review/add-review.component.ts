@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { ReviewsService } from '../_services/reviews.service';
 import {ThesisService} from "../_services/thesis.service";
-
+import { TokenStorageService } from '../_services/token-storage.service';
 @Component({
   selector: 'app-add-review',
   templateUrl: './add-review.component.html',
@@ -25,7 +25,7 @@ export class AddReviewComponent implements OnInit {
   private urlArr: any = {};
 
 
-  constructor( private userService: UserService, private reviewsService: ReviewsService, private thesisService: ThesisService) { }
+  constructor( private userService: UserService, private reviewsService: ReviewsService, private thesisService: ThesisService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.currentURL = window.location.href;
@@ -33,7 +33,6 @@ export class AddReviewComponent implements OnInit {
     this.thesisId = this.urlArr[this.urlArr.length-2];
     this.userService.getUniversityEmployeeFeatures().subscribe(
       data => {
-
         console.log("Id thes: " + this.thesisId )
         this.content = data;
         this.authorized = true;
@@ -59,7 +58,7 @@ export class AddReviewComponent implements OnInit {
 
 
   onSubmit(): void {
-    this.reviewsService.createReviews(this.form).subscribe(
+    this.reviewsService.createReviews(this.form, this.thesisId).subscribe(
       data => {
         this.addedReview = data;
         console.log("Id Thesis dodanej: " + this.addedReview.id);

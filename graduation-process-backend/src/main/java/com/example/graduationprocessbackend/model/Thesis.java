@@ -135,4 +135,12 @@ public class Thesis {
     public void setReviewers(Collection<AcademicWorker> reviewers) {
         this.reviewers = reviewers;
     }
+
+    public List<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
 }

@@ -91,4 +91,12 @@ public class User {
     public void setThesisEnrolled(Collection<Thesis> thesisEnrolled) {
         this.thesisEnrolled = thesisEnrolled;
     }
+
+    public List<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
 }

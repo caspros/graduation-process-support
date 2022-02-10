@@ -20,7 +20,7 @@ const httpOptions = {
 export class ReviewsService {
   private baseURL = backendURL + '/api/reviews';
   private baseThesisURL = backendURL + '/api/thesis';
-  private baseURLCreateReviews = backendURL + '/api/create-reviews';
+  private baseURLCreateReviews = backendURL + '/api/create-review';
   private user: any;
 
   constructor(private httpClient: HttpClient, private authService: AuthService, private tokenStorage: TokenStorageService) { }
@@ -39,13 +39,14 @@ export class ReviewsService {
     return this.httpClient.get<Thesis[]>(`${this.baseThesisURL}-reviewer`);
   }
 
-  createReviews(reviews: Reviews): Observable<Object>{
-
+  createReviews(reviews: Reviews, thesisId: number): Observable<Object>{
     if (this.tokenStorage.getToken()) {
       this.user = this.tokenStorage.getUser();
-      //thesis.id_student = this.user.id;
     }
+
     reviews.creation_date = new Date()
+    reviews.id_user =  this.user.id;
+    reviews.id_thesis =  thesisId;
 
     console.log(reviews)
     console.log(this.user.id)

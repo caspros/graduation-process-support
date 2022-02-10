@@ -16,7 +16,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_review;
 
     @ManyToOne()
     @JoinColumn(name="id_thesis", referencedColumnName = "id", insertable = false, updatable = false)
@@ -26,13 +26,13 @@ public class Review {
     @JoinColumn(name="id_user", referencedColumnName = "id", insertable = false, updatable = false)
     private User user;
 
-
     @NotBlank
     private double grade;
 
     @NotBlank
     private String review_description;
 
+    @NotBlank
     @CreatedDate
     private Date creation_date;
 
@@ -40,11 +40,13 @@ public class Review {
     }
 
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_review) {
+        this.id_review = id_review;
     }
 
-
+    public int getId() {
+        return id_review;
+    }
 
     public void setGrade(double grade) {
         this.grade = grade;
@@ -57,12 +59,6 @@ public class Review {
     public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
     }
-
-    public int getId() {
-        return id;
-    }
-
-
 
     public double getGrade() {
         return grade;
@@ -83,6 +79,7 @@ public class Review {
     public void setThesis(Thesis thesis) {
         this.thesis = thesis;
     }
+
     public User getUser() {
         return user;
     }
