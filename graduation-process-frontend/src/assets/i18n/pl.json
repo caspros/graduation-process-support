@@ -11,6 +11,17 @@
         "table-button-assign": "Przydziel",
         "title2": "Prace do ponownego zrecenzowania"
   },
+  "assign-reviewer": {
+    "title": "Dane pracy dyplomowej",
+    "form-title": "Wybrany temat",
+    "form-desc": "Krótki opis tematu",
+    "form-promoter": "Promotor",
+    "form-author": "Autor",
+    "form-select-reviewer": "Wybierz recenzenta",
+    "form-selected-reviewer": "Wybrany recenzent",
+    "table-button-assign": "Przypisz recenzenta",
+    "table-button-change": "Zmień"
+  },
   "app": {
     "title": "Dyplomowanie",
     "nav": "Przydziel recenzentów",

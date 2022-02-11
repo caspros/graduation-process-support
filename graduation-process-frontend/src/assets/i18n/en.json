@@ -11,6 +11,17 @@
     "table-button-assign": "Assign",
     "title2": "Thesis to review one more time"
   },
+  "assign-reviewer": {
+    "title": "Thesis information",
+    "form-title": "Selected thesis title",
+    "form-desc": "Short description",
+    "form-promoter": "Promoter",
+    "form-author": "Author",
+    "form-select-reviewer": "Select reviewer",
+    "form-selected-reviewer": "Selected reviewer",
+    "table-button-assign": "Assign",
+    "table-button-change": "Change"
+  },
   "app": {
     "title": "Graduation Process",
     "nav": "Assign reviewers",
